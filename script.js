@@ -440,6 +440,19 @@
     });
   });
 
+  // Si se llega a un servicio desde el menú (#tasaciones…), se abre su tarjeta
+  const openFromHash = () => {
+    const card = location.hash && document.getElementById(location.hash.slice(1));
+    if (!card || !card.classList.contains('project')) return;
+    projects.forEach(p => p.classList.remove('is-open'));
+    card.classList.add('is-open', 'is-visible');
+  };
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
+  projects.forEach(card => card.addEventListener('mouseleave', () => {
+    if (window.matchMedia('(hover: hover)').matches) card.classList.remove('is-open');
+  }));
+
   /* ---------- Email protegido contra robots ---------- */
   // El email no aparece escrito en el HTML: se compone aquí.
   const emailLinks = $$('.js-email');

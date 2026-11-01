@@ -306,6 +306,56 @@ def project_cards(items):
           </article>''')
     return "\n".join(out)
 
+# Servicios con el mismo formato que los proyectos: dibujo + nombre; al pasar por encima, todo lo demás
+SERVICE_ART = {
+    "edificacion": ("Proyecto de edificación", "Obra nueva",
+        '<path class="ink" d="M70 240V110h130v130M200 240V60h110v180M50 240h290"/><path class="ink" d="M100 140h30v30h-30zM150 140h30v30h-30zM100 190h30v30h-30zM230 90h50v30h-50zM230 150h50v30h-50z"/><path class="gold-stroke" d="M50 255h290M200 60l55-30 55 30"/>'),
+    "tasaciones": ("Tasación / valoración", "Valoración",
+        '<path class="ink" d="M70 240V140l75-55 75 55v100M50 240h200"/><path class="ink" d="M125 240v-55h40v55M95 160h25v25H95z"/><path class="gold-stroke" d="M250 95h80l22 25-22 25h-80z"/><circle class="gold-stroke" cx="268" cy="120" r="6"/><path class="gold-stroke" d="M220 140l30-20"/>'),
+    "electricas": ("Infraestructura eléctrica", "Energía",
+        '<path class="ink" d="M50 240h300M70 240v-70h90v70M95 240v-40h40v40"/><path class="ink" d="M40 95q90 40 160 15M200 110q90 25 160-15"/><path class="gold-stroke" d="M250 40l-40 200M250 40l40 200M222 100h56M212 150h76M230 60h40"/>'),
+    "rehabilitacion": ("Rehabilitación o reforma", "Rehabilitación",
+        '<path class="ink" d="M110 240V70h180v170M90 240h220"/><path class="ink" d="M140 100h40v45h-40zM220 100h40v45h-40zM140 175h40v45h-40zM220 175h40v45h-40z"/><path class="gold-stroke" d="M90 60v180M310 60v180M90 120h220M90 180h220" stroke-dasharray="6 6"/>'),
+    "licencias": ("Licencia o legalización", "Tramitación",
+        '<path class="ink" d="M120 40h120l40 40v160H120zM240 40v40h40M145 110h110M145 135h110M145 160h70"/><circle class="gold-stroke" cx="255" cy="205" r="28"/><path class="gold-stroke" d="M242 205l10 10 18-20"/>'),
+    "legalizaciones": ("Licencia o legalización", "Regularización",
+        '<path class="ink" d="M60 240V140l70-55 70 55v100M40 240h300M110 240v-50h40v50"/><path class="gold-stroke" d="M200 240V150h110v90M230 180h40v30h-40z" stroke-dasharray="5 6"/>'),
+    "peritaciones": ("Peritación o informe", "Peritación",
+        '<path class="ink" d="M60 240V70h170v170M40 240h210"/><path class="gold-stroke" d="M140 70l18 45-26 28 22 40-10 57"/><circle class="ink" cx="285" cy="130" r="42"/><path class="ink" d="M315 160l40 40"/>'),
+    "direccion": ("Dirección de obra", "Obra",
+        '<path class="ink" d="M110 200q0-90 90-90t90 90zM80 200h240v18H80z"/><path class="gold-stroke" d="M200 110v90M160 125v40M240 125v40"/><path class="ink" d="M60 250h280"/>'),
+    "industrial": ("Naves e industria", "Industrial",
+        '<path class="ink" d="M50 240V140l60-45v45l60-45v45l60-45v45l60-45v145M30 240h340"/><path class="ink" d="M90 240v-60h60v60M220 190h80v30h-80z"/><path class="gold-stroke" d="M50 140h240"/>'),
+    "eficiencia": ("Eficiencia energética", "Energía",
+        '<path class="ink" d="M60 240V150l70-55 70 55v90M40 240h180M110 240v-45h40v45"/><circle class="gold-stroke" cx="300" cy="70" r="22"/><path class="gold-stroke" d="M250 130h50M250 160h75M250 190h100M250 220h120"/>'),
+    "ite": ("ITE / IEE", "Inspección",
+        '<path class="ink" d="M70 240V60h150v180M50 240h190M100 90h30v30h-30zM160 90h30v30h-30zM100 150h30v30h-30zM160 150h30v30h-30z"/><path class="ink" d="M255 80h90v150h-90zM280 70h40v20h-40z"/><path class="gold-stroke" d="M270 120l8 8 14-14M270 160l8 8 14-14M270 200l8 8 14-14M302 125h30M302 165h30M302 205h30"/>'),
+    "urbanismo": ("Urbanismo y suelo", "Urbanismo",
+        '<path class="ink" d="M50 60h300v180H50zM50 150h120V60M170 150l80 90M250 60v90h100"/><path class="gold-stroke" d="M50 260h300M50 252v16M350 252v16M170 150h80v-90"/>'),
+}
+
+def service_drawing_cards():
+    from urllib.parse import quote
+    out = []
+    for i, (sid, title, text, bullets, feat) in enumerate(SERVICES, 1):
+        serv, tag, svg = SERVICE_ART[sid]
+        href = f"contacto.html?servicio={quote(serv)}&amp;tipo={quote(title)}#contact-form"
+        badge = '<span class="project__badge">Especialidad</span>' if feat else ''
+        out.append(f"""          <article class="project reveal" id="{sid}" tabindex="0" aria-label="{title}">
+            <div class="project__img">
+              <svg viewBox="0 0 400 280" aria-hidden="true">{animate_svg(svg)}</svg>{badge}
+              <a class="project__cta" href="{href}">Consultar <span aria-hidden="true">→</span></a>
+            </div>
+            <h3><span class="project__num">{i:02d}</span> {title}</h3>
+            <div class="project__details">
+              <div class="project__details-inner">
+                <div class="project__meta"><span>Servicio</span><span>{tag}</span></div>
+                <p>{text}</p>
+              </div>
+            </div>
+          </article>""")
+    return "\n".join(out)
+
 STEPS = '''
     <section class="section section--dark">
       <div class="container">
@@ -480,8 +530,8 @@ servicios = page_hero("02", "Servicios", "Todo lo que tu proyecto necesita, <em 
     '<g class="ink"><path class="draw" d="M40 290h320"/><path class="draw" d="M70 290V170h100v120"/><path class="draw" d="M100 290v-60h40v60"/></g><g class="gold-line"><path class="draw" d="M260 290V60M235 85h50M222 120h76M260 60l-25 25M260 60l25 25M170 190l90-70M298 120l52 60v110"/></g>') + f'''
     <section class="section">
       <div class="container">
-        <div class="services services--detailed">
-{service_cards(SERVICES, detailed=True)}
+        <div class="projects projects--services">
+{service_drawing_cards()}
         </div>
       </div>
     </section>
@@ -559,6 +609,11 @@ contacto = page_hero("04", "Contacto", "Hablemos de <em class=\"gold\">tu proyec
               <option>Rehabilitación o reforma</option>
               <option>Licencia o legalización</option>
               <option>Peritación o informe</option>
+              <option>Dirección de obra</option>
+              <option>Naves e industria</option>
+              <option>Eficiencia energética</option>
+              <option>ITE / IEE</option>
+              <option>Urbanismo y suelo</option>
               <option>Otro</option>
             </select>
           </div>

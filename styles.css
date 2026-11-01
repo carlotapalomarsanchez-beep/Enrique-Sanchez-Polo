@@ -418,6 +418,9 @@ html.entering .curtain span { transform: scaleY(1); transition: none; }
 }
 @media (hover: none) { .project { cursor: pointer; } }
 @media (prefers-reduced-motion: reduce) { .project .project__img .u { animation: none !important; } }
+.project__num { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--gold-ink); margin-right: 6px; }
+.project__badge { position: absolute; top: 14px; left: 16px; font: 600 10px var(--sans); letter-spacing: .18em; text-transform: uppercase; color: var(--gold-ink); border: 1px solid var(--gold); padding: 4px 8px; background: rgba(255,255,255,.7); }
+.projects--services .project { scroll-margin-top: 110px; }
 .project.is-hidden { display: none; }
 .project.is-in { animation: popIn .6s var(--ease); }
 @keyframes popIn { from { opacity: 0; transform: translateY(20px) scale(.98); } }
