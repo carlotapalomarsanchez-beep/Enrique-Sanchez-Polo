@@ -2,7 +2,6 @@
   const root = document.documentElement;
   const body = document.body;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -124,12 +123,14 @@
     toggle.setAttribute('aria-expanded', false);
   }));
 
-  /* ---------- Edificio que se construye ---------- */
-  const build = $('.build');
+  /* ---------- Dibujo que se construye junto al contenido ---------- */
+  const obra = $('.obra');
   let updateBuild = () => {};
-  if (build) {
-    const svg = $('.build__svg', build);
-    const phases = [[], [], [], [], []];
+  if (obra) {
+    const art = $('.obra__art', obra);
+    const svg = $('.build__svg', obra);
+    const names = (art.dataset.phases || '').split('|');
+    const phases = names.map(() => []);
     $$('[data-phase]', svg).forEach(el => {
       const L = el.getTotalLength();
       el._L = L;
@@ -137,14 +138,17 @@
       el.style.strokeDashoffset = L;
       phases[+el.dataset.phase].push(el);
     });
-    const steps = $$('.build__phases li', build);
-    const pct = $('.build__pct', build);
-    const bar = $('.build__bar i', build);
-    const now = $('.build__now', build);
+    const pct = $('.build__pct', obra);
+    const bar = $('.build__bar i', obra);
+    const label = $('.obra__phase', obra);
+    const num = $('.obra__n', obra);
+    let current = 0;
     updateBuild = () => {
-      const r = build.getBoundingClientRect();
-      const p = clamp(-r.top / (r.height - window.innerHeight) / 0.94);
-      const P = p * 5;
+      const r = obra.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // empieza cuando la sección entra y termina al llegar al final del contenido
+      const p = clamp((vh * 0.85 - r.top) / (r.height - vh * 0.35));
+      const P = p * phases.length;
       phases.forEach((list, i) => {
         const t = P - i;
         list.forEach((el, j) => {
@@ -152,12 +156,16 @@
           el.style.strokeDashoffset = el._L * (1 - clamp((t - start) / 0.4));
         });
       });
-      const active = Math.min(4, Math.floor(P));
-      steps.forEach((li, i) => {
-        li.classList.toggle('is-active', i === active);
-        li.classList.toggle('is-done', i < active);
-      });
-      if (now && steps[active]) now.textContent = $('h3', steps[active]).textContent;
+      const active = Math.min(phases.length - 1, Math.floor(P));
+      if (active !== current) {
+        current = active;
+        label.classList.add('is-changing');
+        setTimeout(() => {
+          label.textContent = names[active];
+          num.textContent = String(active + 1).padStart(2, '0');
+          label.classList.remove('is-changing');
+        }, 200);
+      }
       pct.textContent = Math.round(p * 100);
       bar.style.transform = `scaleX(${p})`;
       svg.classList.toggle('is-lit', p >= 0.99);
@@ -182,56 +190,6 @@
   window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   window.addEventListener('resize', onScroll);
   onScroll();
-
-  /* ---------- Cursor, tarjetas 3D y botones magnéticos ---------- */
-  if (finePointer && !reduce) {
-    const cursor = $('.cursor');
-    let mx = 0, my = 0, cx = 0, cy = 0;
-    window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.classList.add('is-on'); });
-    document.addEventListener('mouseleave', () => cursor.classList.remove('is-on'));
-    const loop = () => {
-      cx += (mx - cx) * 0.18; cy += (my - cy) * 0.18;
-      cursor.style.transform = `translate(${cx}px, ${cy}px)`;
-      requestAnimationFrame(loop);
-    };
-    loop();
-    document.addEventListener('mouseover', e => cursor.classList.toggle('is-hover', !!e.target.closest('a, button, .project, .service, label')));
-
-    $$('.tilt').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = `perspective(900px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg) translateZ(0)`;
-      });
-      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-    });
-
-    $$('.magnetic').forEach(btn => {
-      btn.addEventListener('mousemove', e => {
-        const r = btn.getBoundingClientRect();
-        btn.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.25}px, ${(e.clientY - r.top - r.height / 2) * 0.35}px)`;
-      });
-      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
-    });
-  }
-
-  /* ---------- Pestañas de servicios: marcar la activa ---------- */
-  const chips = $$('.chips a');
-  if (chips.length) {
-    const bar = $('.chips__inner');
-    const chipIo = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        chips.forEach(c => {
-          const on = c.getAttribute('href') === '#' + e.target.id;
-          c.classList.toggle('is-active', on);
-          if (on) bar.scrollTo({ left: c.offsetLeft - 32, behavior: 'smooth' });
-        });
-      });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    $$('.services--detailed .service').forEach(s => chipIo.observe(s));
-  }
 
   /* ---------- Filtro de proyectos ---------- */
   const filters = $$('.filter');

@@ -46,7 +46,6 @@ INTRO = f'''
   <!-- Transición entre páginas -->
   <div class="curtain" aria-hidden="true"><span></span><span></span></div>
   <div class="progress" aria-hidden="true"><span></span></div>
-  <div class="cursor" aria-hidden="true"></div>
 '''
 
 SUB = [
@@ -96,7 +95,7 @@ FOOTER = f'''
   <section class="cta-band">
     <div class="container cta-band__inner">
       <h2 data-split>¿Tienes un proyecto en mente?</h2>
-      <a href="contacto.html" class="btn btn--gold magnetic">Hablemos <span aria-hidden="true">→</span></a>
+      <a href="contacto.html" class="btn btn--gold">Hablemos <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
@@ -171,7 +170,7 @@ def service_cards(items, detailed=False):
         extra = ""
         if detailed:
             extra = "<ul class=\"service__list\">" + "".join(f"<li>{b}</li>" for b in bullets) + "</ul>"
-        out.append(f'''          <article class="service{' service--featured' if feat else ''} reveal tilt" id="{sid}">
+        out.append(f'''          <article class="service{' service--featured' if feat else ''} reveal" id="{sid}">
             <span class="service__num">{i:02d}</span>
             <h3>{title}</h3>
             <p>{text}</p>{extra}
@@ -265,31 +264,6 @@ def build_svg():
     els.append('<text class="b-label" x="295" y="604" text-anchor="middle">Certificado final de obra</text>')
     return "".join(els)
 
-BUILD = f'''
-    <section class="build" id="construccion">
-      <div class="build__sticky">
-        <div class="container build__grid">
-          <div class="build__copy">
-            <p class="eyebrow">Del plano a la obra</p>
-            <h2>Así levantamos <span class="gold serif">cada proyecto.</span></h2>
-            <ol class="build__phases">
-              <li data-step="0"><span>01</span><div><h3>Replanteo y cimentación</h3><p>Estudio del terreno, normativa y bases sólidas.</p></div></li>
-              <li data-step="1"><span>02</span><div><h3>Estructura</h3><p>Pilares y forjados calculados con precisión.</p></div></li>
-              <li data-step="2"><span>03</span><div><h3>Cerramientos</h3><p>Fachada, huecos y envolvente eficiente.</p></div></li>
-              <li data-step="3"><span>04</span><div><h3>Cubierta e instalaciones</h3><p>Electricidad, climatización y renovables.</p></div></li>
-              <li data-step="4"><span>05</span><div><h3>Entrega</h3><p>Control de calidad y certificado final.</p></div></li>
-            </ol>
-            <p class="build__now">Replanteo y cimentación</p>
-            <div class="build__meter"><span class="build__pct">0</span><small>% de obra</small><div class="build__bar"><i></i></div></div>
-          </div>
-          <div class="build__art">
-            <svg viewBox="0 0 600 620" class="build__svg" aria-label="Dibujo de un edificio que se construye al hacer scroll" role="img">{build_svg()}</svg>
-          </div>
-        </div>
-      </div>
-    </section>
-'''
-
 HERO = '''
     <section class="hero">
       <div class="hero__grid container">
@@ -298,7 +272,7 @@ HERO = '''
           <h1 data-split>Arquitectura rigurosa, <em class="gold">pensada para durar.</em></h1>
           <p class="lead reveal">Más de 25 años proyectando, valorando y dirigiendo obras en Algeciras y el Campo de Gibraltar. Edificación, tasaciones, infraestructuras eléctricas, licencias y peritaciones con un único interlocutor técnico.</p>
           <div class="hero__cta reveal">
-            <a href="contacto.html" class="btn magnetic">Solicitar presupuesto</a>
+            <a href="contacto.html" class="btn">Solicitar presupuesto</a>
             <a href="servicios.html" class="link-arrow">Ver servicios <span aria-hidden="true">→</span></a>
           </div>
         </div>
@@ -343,36 +317,67 @@ HERO = '''
 '''
 
 # ---------------- INICIO ----------------
-inicio = HERO + marquee() + '''
-    <section class="section" id="estudio">
-      <div class="container split">
-        <div>
-          <p class="eyebrow reveal">01 — El estudio</p>
-          <h2 data-split>Un cuarto de siglo construyendo en el sur.</h2>
-        </div>
-        <div class="split__body">
-          <p class="reveal">El estudio de <strong>Enrique Sánchez Polo</strong> nace en Algeciras con una idea sencilla: que cada proyecto, desde una vivienda unifamiliar hasta un centro de transformación, se resuelva con el mismo rigor técnico, claridad y cumplimiento de plazos.</p>
-          <p class="reveal">Más de 25 años acompañando a particulares, comunidades, empresas y compañías del sector energético en todas las fases: proyecto, licencias, obra, legalización y valoración.</p>
-          <a href="estudio.html" class="link-arrow reveal">Conocer el estudio <span aria-hidden="true">→</span></a>
-        </div>
-      </div>
-    </section>
-''' + BUILD + f'''
-    <section class="section section--grey">
-      <div class="container">
-        <div class="section__head section__head--row">
-          <div>
+PHASES = ["Replanteo y cimentación", "Estructura", "Cerramientos", "Cubierta e instalaciones", "Entrega"]
+
+OBRA = f'''
+    <section class="obra" id="estudio">
+      <div class="container obra__grid">
+        <aside class="obra__art" aria-hidden="true" data-phases="{'|'.join(PHASES)}">
+          <div class="obra__frame">
+            <svg viewBox="0 0 600 620" class="build__svg">{build_svg()}</svg>
+            <div class="obra__meter">
+              <p class="obra__label"><span class="obra__n">01</span> <span class="obra__phase">{PHASES[0]}</span></p>
+              <p class="obra__pct"><span class="build__pct">0</span>%</p>
+              <div class="build__bar"><i></i></div>
+            </div>
+          </div>
+        </aside>
+
+        <div class="obra__content">
+          <div class="obra__block">
+            <p class="eyebrow reveal">01 — El estudio</p>
+            <h2 data-split>Un cuarto de siglo construyendo en el sur.</h2>
+            <p class="obra__text reveal">El estudio de <strong>Enrique Sánchez Polo</strong> nace en Algeciras con una idea sencilla: que cada proyecto, desde una vivienda unifamiliar hasta un centro de transformación, se resuelva con el mismo rigor técnico, claridad y cumplimiento de plazos.</p>
+            <p class="obra__text reveal">Más de 25 años acompañando a particulares, comunidades, empresas y compañías del sector energético en todas las fases: proyecto, licencias, obra, legalización y valoración.</p>
+            <a href="estudio.html" class="link-arrow reveal">Conocer el estudio <span aria-hidden="true">→</span></a>
+          </div>
+
+          <div class="obra__block">
             <p class="eyebrow reveal">02 — Especialidades</p>
             <h2 data-split>Lo que más nos piden.</h2>
-          </div>
-          <a href="servicios.html" class="link-arrow reveal">Ver los 12 servicios <span aria-hidden="true">→</span></a>
-        </div>
-        <div class="services">
+            <div class="services services--two">
 {service_cards([SERVICES[i] for i in (1, 2, 0, 4, 6, 7)])}
+            </div>
+            <a href="servicios.html" class="link-arrow reveal obra__more">Ver los 12 servicios <span aria-hidden="true">→</span></a>
+          </div>
+
+          <div class="obra__block">
+            <p class="eyebrow reveal">03 — Método de trabajo</p>
+            <h2 data-split>Un proceso claro, sin sorpresas.</h2>
+            <ol class="steps steps--light">
+              <li class="reveal"><span class="steps__n">01</span><h3>Primera reunión</h3><p>Escuchamos tus necesidades, visitamos el inmueble o la parcela y analizamos la normativa aplicable.</p></li>
+              <li class="reveal"><span class="steps__n">02</span><h3>Propuesta y presupuesto</h3><p>Te entregamos una propuesta de honorarios cerrada, con plazos y alcance de cada fase.</p></li>
+              <li class="reveal"><span class="steps__n">03</span><h3>Proyecto y tramitación</h3><p>Redactamos la documentación técnica, la visamos y la presentamos ante ayuntamiento, Junta o compañía.</p></li>
+              <li class="reveal"><span class="steps__n">04</span><h3>Obra y entrega</h3><p>Dirigimos la ejecución, controlamos calidad y costes y emitimos el certificado final de obra.</p></li>
+            </ol>
+          </div>
+
+          <div class="obra__block">
+            <p class="eyebrow reveal">04 — Para quién trabajamos</p>
+            <h2 data-split>Particulares, empresas e instituciones.</h2>
+            <ul class="clients">
+              <li class="reveal"><h3>Particulares</h3><p>Viviendas, reformas, tasaciones, herencias y legalizaciones.</p></li>
+              <li class="reveal"><h3>Comunidades de propietarios</h3><p>ITE, rehabilitación, accesibilidad y patologías.</p></li>
+              <li class="reveal"><h3>Empresas y promotoras</h3><p>Naves, locales, promociones y licencias de actividad.</p></li>
+              <li class="reveal"><h3>Sector energético</h3><p>Obra civil de infraestructuras eléctricas y edificaciones técnicas.</p></li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
-''' + STEPS
+'''
+
+inicio = HERO + marquee() + OBRA
 
 page("inicio", "Enrique Sánchez Polo · Arquitecto en Algeciras",
      "Estudio de arquitectura de Enrique Sánchez Polo en Algeciras. Más de 25 años en edificación, tasaciones, infraestructuras eléctricas, licencias y peritaciones.",
@@ -433,11 +438,9 @@ page("estudio", "Estudio · Enrique Sánchez Polo Arquitecto",
      "Conoce el estudio de arquitectura de Enrique Sánchez Polo en Algeciras: más de 25 años de experiencia en el Campo de Gibraltar.", estudio)
 
 # ---------------- SERVICIOS ----------------
-tabs = "".join(f'<a href="#{s[0]}">{s[1]}</a>' for s in SERVICES)
 servicios = page_hero("02", "Servicios", "Todo lo que tu proyecto necesita, <em class=\"gold\">en un mismo estudio.</em>",
     "Servicios profesionales de arquitectura con visado colegial, desde la idea inicial hasta el certificado final de obra.",
     '<g class="ink"><path class="draw" d="M40 290h320"/><path class="draw" d="M70 290V170h100v120"/><path class="draw" d="M100 290v-60h40v60"/></g><g class="gold-line"><path class="draw" d="M260 290V60M235 85h50M222 120h76M260 60l-25 25M260 60l25 25M170 190l90-70M298 120l52 60v110"/></g>') + f'''
-    <nav class="chips" aria-label="Ir a servicio"><div class="container chips__inner">{tabs}</div></nav>
     <section class="section">
       <div class="container">
         <div class="services services--detailed">
@@ -510,7 +513,7 @@ contacto = page_hero("04", "Contacto", "Hablemos de <em class=\"gold\">tu proyec
           </label>
           <label>Mensaje<textarea name="mensaje" rows="5" required></textarea></label>
           <label class="check"><input type="checkbox" required> He leído y acepto la política de privacidad.</label>
-          <button type="submit" class="btn magnetic">Enviar consulta</button>
+          <button type="submit" class="btn">Enviar consulta</button>
           <p class="form__status" role="status" aria-live="polite"></p>
         </form>
       </div>
