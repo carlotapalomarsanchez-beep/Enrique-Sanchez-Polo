@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enrique Sánchez Polo · Arquitecto en Algeciras</title>
+  <meta name="description" content="Estudio de arquitectura de Enrique Sánchez Polo en Algeciras. Más de 25 años de experiencia en proyectos de edificación, tasaciones, infraestructuras eléctricas, licencias, peritaciones y dirección de obra en el Campo de Gibraltar.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23fff'/%3E%3Cpath d='M14 50V22l18-10 18 10v28' fill='none' stroke='%23B08D57' stroke-width='3'/%3E%3Cpath d='M26 50V34h12v16' fill='none' stroke='%23111' stroke-width='3'/%3E%3C/svg%3E">
+</head>
+<body>
+
+  <!-- CABECERA -->
+  <header class="nav" id="top">
+    <div class="nav__inner">
+      <a href="#top" class="brand" aria-label="Inicio">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg>
+        </span>
+        <span class="brand__text">
+          <strong>Enrique Sánchez Polo</strong>
+          <small>Arquitecto</small>
+        </span>
+      </a>
+      <button class="nav__toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
+      <nav class="nav__links" aria-label="Principal">
+        <a href="#estudio">Estudio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#tipologias">Proyectos</a>
+        <a href="#metodo">Método</a>
+        <a href="#zona">Zona</a>
+        <a href="#contacto" class="btn btn--small">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__grid container">
+        <div class="hero__copy">
+          <p class="eyebrow reveal">Estudio de arquitectura · Algeciras</p>
+          <h1 class="reveal">Arquitectura rigurosa,<br><span class="gold">pensada para durar.</span></h1>
+          <p class="lead reveal">Más de 25 años proyectando, valorando y dirigiendo obras en Algeciras y el Campo de Gibraltar. Edificación, tasaciones, infraestructuras eléctricas, licencias y peritaciones con un único interlocutor técnico.</p>
+          <div class="hero__cta reveal">
+            <a href="#contacto" class="btn">Solicitar presupuesto</a>
+            <a href="#servicios" class="link-arrow">Ver servicios <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+
+        <div class="hero__art reveal" aria-hidden="true">
+          <svg viewBox="0 0 520 560" class="drawing">
+            <!-- retícula -->
+            <g class="grid-lines">
+              <path d="M40 0v560M140 0v560M240 0v560M340 0v560M440 0v560"/>
+              <path d="M0 80h520M0 180h520M0 280h520M0 380h520M0 480h520"/>
+            </g>
+            <!-- volumen principal -->
+            <g class="ink">
+              <path class="draw" d="M80 500V200h220v300"/>
+              <path class="draw" d="M300 500V120h140v380"/>
+              <path class="draw" d="M40 500h460"/>
+              <path class="draw" d="M80 260h220M80 320h220M80 380h220M80 440h220"/>
+              <path class="draw" d="M135 200v300M190 200v300M245 200v300"/>
+              <path class="draw" d="M330 160h80v60h-80zM330 260h80v60h-80zM330 360h80v60h-80z"/>
+            </g>
+            <!-- acento dorado -->
+            <g class="gold-line">
+              <path class="draw" d="M300 120l70-50 70 50"/>
+              <path class="draw" d="M60 530h400"/>
+              <circle cx="460" cy="70" r="26" class="draw"/>
+            </g>
+            <!-- cotas -->
+            <g class="dim">
+              <path d="M80 540h360M80 534v12M440 534v12"/>
+              <text x="250" y="556" text-anchor="middle">25+ años</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="container">
+        <ul class="stats">
+          <li class="reveal"><strong>25<span class="gold">+</span></strong><span>años de ejercicio profesional</span></li>
+          <li class="reveal"><strong>12</strong><span>áreas de servicio técnico</span></li>
+          <li class="reveal"><strong>1</strong><span>interlocutor de principio a fin</span></li>
+          <li class="reveal"><strong class="stats__text">Campo de Gibraltar</strong><span>ámbito principal de trabajo</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ESTUDIO -->
+    <section class="section" id="estudio">
+      <div class="container split">
+        <div>
+          <p class="eyebrow reveal">01 — El estudio</p>
+          <h2 class="reveal">Un cuarto de siglo construyendo en el sur.</h2>
+        </div>
+        <div class="split__body">
+          <p class="reveal">El estudio de <strong>Enrique Sánchez Polo</strong> nace en Algeciras con una idea sencilla: que cada proyecto, desde una vivienda unifamiliar hasta un centro de transformación, se resuelva con el mismo rigor técnico, claridad y cumplimiento de plazos.</p>
+          <p class="reveal">A lo largo de más de 25 años, el estudio ha acompañado a particulares, comunidades de propietarios, empresas, promotoras, entidades financieras y compañías del sector energético en todas las fases: estudio previo, proyecto, tramitación de licencias, dirección de obra, legalización y valoración.</p>
+          <p class="reveal">Conocemos la normativa urbanística de los municipios del Campo de Gibraltar, los procedimientos ante la Junta de Andalucía y las particularidades del clima y del entorno costero. Esa experiencia local se traduce en proyectos que se aprueban, se construyen y funcionan.</p>
+          <div class="values reveal">
+            <div><span class="gold">—</span> Rigor técnico</div>
+            <div><span class="gold">—</span> Trato directo</div>
+            <div><span class="gold">—</span> Conocimiento local</div>
+            <div><span class="gold">—</span> Plazos cumplidos</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section class="section section--grey" id="servicios">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow reveal">02 — Servicios</p>
+          <h2 class="reveal">Todo lo que tu proyecto necesita, en un mismo estudio.</h2>
+          <p class="section__intro reveal">Servicios profesionales de arquitectura con visado colegial, desde la idea inicial hasta el certificado final de obra.</p>
+        </div>
+
+        <div class="services">
+          <article class="service reveal">
+            <span class="service__num">01</span>
+            <h3>Proyectos de edificación</h3>
+            <p>Proyecto básico y de ejecución de viviendas unifamiliares, plurifamiliares, locales y edificios de uso terciario. Obra nueva y ampliaciones.</p>
+          </article>
+          <article class="service service--featured reveal">
+            <span class="service__num">02</span>
+            <h3>Tasaciones y valoraciones</h3>
+            <p>Valoración de inmuebles, solares y fincas rústicas. Tasaciones para herencias, divorcios, compraventas, expropiaciones y fines hipotecarios.</p>
+          </article>
+          <article class="service service--featured reveal">
+            <span class="service__num">03</span>
+            <h3>Infraestructuras eléctricas</h3>
+            <p>Proyectos de obra civil para centros de transformación, subestaciones, líneas de media y baja tensión, canalizaciones y edificaciones técnicas.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service__num">04</span>
+            <h3>Rehabilitación y reforma</h3>
+            <p>Reformas integrales, rehabilitación de fachadas y cubiertas, cambios de uso, adecuación de locales y mejora de la accesibilidad.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service__num">05</span>
+            <h3>Licencias y actividades</h3>
+            <p>Licencias de obra, de apertura y de actividad, declaraciones responsables y licencias de primera ocupación o utilización.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service__num">06</span>
+            <h3>Legalizaciones y AFO</h3>
+            <p>Legalización de edificaciones existentes y expedientes de Asimilado a Fuera de Ordenación según la normativa andaluza (LISTA).</p>
+          </article>
+          <article class="service reveal">
+            <span class="service__num">07</span>
+            <h3>Peritaciones e informes</h3>
+            <p>Informes periciales judiciales y de parte, dictámenes de patologías, humedades, grietas, vicios constructivos y daños por siniestros.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service__num">08</span>
+            <h3>Dirección de obra</h3>
+            <p>Dirección facultativa, control de calidad, coordinación de seguridad y salud y certificación final de obra.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service__num">09</span>
+            <h3>Naves y proyectos industriales</h3>
+            <p>Naves industriales y logísticas, almacenes, talleres y edificios vinculados a la actividad portuaria y empresarial de la comarca.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service__num">10</span>
+            <h3>Eficiencia energética</h3>
+            <p>Certificados energéticos, auditorías y propuestas de mejora: aislamiento, envolvente, instalaciones y energías renovables.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service__num">11</span>
+            <h3>ITE / IEE</h3>
+            <p>Inspección Técnica de Edificios e Informe de Evaluación del Edificio para comunidades de propietarios y administradores de fincas.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service__num">12</span>
+            <h3>Urbanismo y suelo</h3>
+            <p>Segregaciones, agrupaciones, levantamientos planimétricos, estudios de detalle, informes urbanísticos y viabilidad de solares.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIPOLOGÍAS -->
+    <section class="section" id="tipologias">
+      <div class="container">
+        <div class="section__head section__head--row">
+          <div>
+            <p class="eyebrow reveal">03 — Tipologías de proyecto</p>
+            <h2 class="reveal">Experiencia en escalas y usos muy distintos.</h2>
+          </div>
+          <div class="filters reveal" role="tablist" aria-label="Filtrar tipologías">
+            <button class="filter is-active" data-filter="all">Todos</button>
+            <button class="filter" data-filter="residencial">Residencial</button>
+            <button class="filter" data-filter="tecnico">Técnico</button>
+            <button class="filter" data-filter="consultoria">Consultoría</button>
+          </div>
+        </div>
+
+        <div class="projects">
+          <article class="project reveal" data-cat="residencial">
+            <div class="project__img">
+              <svg viewBox="0 0 400 280" aria-hidden="true"><path class="ink" d="M40 240V130l90-60 90 60v110M220 240V150h140v90M30 240h340"/><path class="ink" d="M100 240v-60h60v60M250 180h30v30h-30zM310 180h30v30h-30z"/><path class="gold-stroke" d="M130 70V40"/></svg>
+            </div>
+            <div class="project__meta"><span>Residencial</span><span>Obra nueva</span></div>
+            <h3>Viviendas unifamiliares</h3>
+            <p>Casas aisladas, pareadas y adosadas adaptadas a la parcela, la orientación y el clima del Estrecho.</p>
+          </article>
+
+          <article class="project reveal" data-cat="residencial">
+            <div class="project__img">
+              <svg viewBox="0 0 400 280" aria-hidden="true"><path class="ink" d="M90 250V40h220v210M60 250h280"/><path class="ink" d="M90 80h220M90 120h220M90 160h220M90 200h220M145 40v210M200 40v210M255 40v210"/><path class="gold-stroke" d="M320 60h40M320 250V60"/></svg>
+            </div>
+            <div class="project__meta"><span>Residencial</span><span>Plurifamiliar</span></div>
+            <h3>Edificios de viviendas</h3>
+            <p>Promociones plurifamiliares, viviendas protegidas y edificios mixtos con locales en planta baja.</p>
+          </article>
+
+          <article class="project reveal" data-cat="tecnico">
+            <div class="project__img">
+              <svg viewBox="0 0 400 280" aria-hidden="true"><path class="ink" d="M60 240V140h120v100M40 240h320"/><path class="ink" d="M90 240v-50h60v50"/><path class="gold-stroke" d="M250 240V60M230 80h40M220 110h60M250 60l-20 20M250 60l20 20M180 150l70-40M280 110l60 40v90"/></svg>
+            </div>
+            <div class="project__meta"><span>Técnico</span><span>Energía</span></div>
+            <h3>Centros de transformación y subestaciones</h3>
+            <p>Edificios prefabricados y de obra, cimentaciones, casetas técnicas y canalizaciones para distribuidoras eléctricas.</p>
+          </article>
+
+          <article class="project reveal" data-cat="tecnico">
+            <div class="project__img">
+              <svg viewBox="0 0 400 280" aria-hidden="true"><path class="ink" d="M40 240V120l160-60 160 60v120M30 240h340"/><path class="ink" d="M80 240v-80h80v80M240 160h80v40h-80z"/><path class="gold-stroke" d="M40 120h320"/></svg>
+            </div>
+            <div class="project__meta"><span>Técnico</span><span>Industrial</span></div>
+            <h3>Naves industriales y logísticas</h3>
+            <p>Naves, almacenes y talleres en polígonos de Algeciras, Los Barrios y San Roque, con licencia de actividad.</p>
+          </article>
+
+          <article class="project reveal" data-cat="consultoria">
+            <div class="project__img">
+              <svg viewBox="0 0 400 280" aria-hidden="true"><path class="ink" d="M70 240V100h160v140M50 240h300"/><path class="ink" d="M100 130h40v40h-40zM160 130h40v40h-40z"/><circle class="gold-stroke" cx="280" cy="120" r="44"/><path class="gold-stroke" d="M312 152l40 40"/><path class="ink" d="M262 120h36M280 102v36"/></svg>
+            </div>
+            <div class="project__meta"><span>Consultoría</span><span>Valoración</span></div>
+            <h3>Tasaciones inmobiliarias</h3>
+            <p>Valoraciones de viviendas, locales, naves, solares y fincas rústicas con informe técnico detallado.</p>
+          </article>
+
+          <article class="project reveal" data-cat="residencial">
+            <div class="project__img">
+              <svg viewBox="0 0 400 280" aria-hidden="true"><path class="ink" d="M80 250V60h240v190M60 250h280"/><path class="ink" d="M120 100h40v50h-40zM240 100h40v50h-40zM120 180h40v50h-40zM240 180h40v50h-40z"/><path class="gold-stroke" d="M60 60l40-30M340 60l-40-30M100 30h200" stroke-dasharray="6 6"/></svg>
+            </div>
+            <div class="project__meta"><span>Residencial</span><span>Rehabilitación</span></div>
+            <h3>Rehabilitación de edificios</h3>
+            <p>Fachadas, cubiertas, estructuras y accesibilidad en edificios existentes y comunidades de propietarios.</p>
+          </article>
+
+          <article class="project reveal" data-cat="consultoria">
+            <div class="project__img">
+              <svg viewBox="0 0 400 280" aria-hidden="true"><path class="ink" d="M80 240V80h200v160M60 240h260"/><path class="gold-stroke" d="M150 80l20 50-30 30 25 40-10 40"/><path class="ink" d="M300 100h60M300 130h60M300 160h40"/></svg>
+            </div>
+            <div class="project__meta"><span>Consultoría</span><span>Peritación</span></div>
+            <h3>Peritaciones y patologías</h3>
+            <p>Diagnóstico de grietas, humedades y defectos constructivos. Informes con validez ante juzgados y aseguradoras.</p>
+          </article>
+
+          <article class="project reveal" data-cat="tecnico">
+            <div class="project__img">
+              <svg viewBox="0 0 400 280" aria-hidden="true"><path class="ink" d="M40 240h320M60 240V150h80v90M160 240V110h80v130M260 240V170h80v70"/><path class="gold-stroke" d="M40 90h320" stroke-dasharray="4 8"/><path class="ink" d="M190 140h20v20h-20z"/></svg>
+            </div>
+            <div class="project__meta"><span>Técnico</span><span>Terciario</span></div>
+            <h3>Locales y edificios terciarios</h3>
+            <p>Adecuación de locales comerciales, oficinas, hostelería y equipamientos, con su licencia de apertura.</p>
+          </article>
+
+          <article class="project reveal" data-cat="consultoria">
+            <div class="project__img">
+              <svg viewBox="0 0 400 280" aria-hidden="true"><path class="ink" d="M40 60h320v180H40z"/><path class="ink" d="M40 140h140V60M180 140l80 100M260 60v80h100"/><path class="gold-stroke" d="M180 140h80v-80"/></svg>
+            </div>
+            <div class="project__meta"><span>Consultoría</span><span>Urbanismo</span></div>
+            <h3>Legalizaciones, AFO y segregaciones</h3>
+            <p>Regularización de edificaciones, divisiones de fincas y estudios de viabilidad urbanística de solares.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MÉTODO -->
+    <section class="section section--dark" id="metodo">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow reveal">04 — Método de trabajo</p>
+          <h2 class="reveal">Un proceso claro, sin sorpresas.</h2>
+        </div>
+        <ol class="steps">
+          <li class="reveal"><span class="steps__n">01</span><h3>Primera reunión</h3><p>Escuchamos tus necesidades, visitamos el inmueble o la parcela y analizamos la normativa aplicable.</p></li>
+          <li class="reveal"><span class="steps__n">02</span><h3>Propuesta y presupuesto</h3><p>Te entregamos una propuesta de honorarios cerrada, con plazos y alcance de cada fase.</p></li>
+          <li class="reveal"><span class="steps__n">03</span><h3>Proyecto y tramitación</h3><p>Redactamos la documentación técnica, la visamos y la presentamos ante ayuntamiento, Junta o compañía.</p></li>
+          <li class="reveal"><span class="steps__n">04</span><h3>Obra y entrega</h3><p>Dirigimos la ejecución, controlamos calidad y costes y emitimos el certificado final de obra.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- CLIENTES -->
+    <section class="section">
+      <div class="container split">
+        <div>
+          <p class="eyebrow reveal">05 — Para quién trabajamos</p>
+          <h2 class="reveal">Particulares, empresas e instituciones.</h2>
+        </div>
+        <ul class="clients">
+          <li class="reveal"><h3>Particulares</h3><p>Viviendas, reformas, tasaciones, herencias y legalizaciones.</p></li>
+          <li class="reveal"><h3>Comunidades de propietarios</h3><p>ITE, rehabilitación, accesibilidad y patologías.</p></li>
+          <li class="reveal"><h3>Empresas y promotoras</h3><p>Naves, locales, promociones y licencias de actividad.</p></li>
+          <li class="reveal"><h3>Sector energético</h3><p>Obra civil de infraestructuras eléctricas y edificaciones técnicas.</p></li>
+          <li class="reveal"><h3>Entidades financieras y aseguradoras</h3><p>Valoraciones, peritaciones y informes de daños.</p></li>
+          <li class="reveal"><h3>Despachos de abogados</h3><p>Informes periciales y dictámenes técnicos para procedimientos judiciales.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ZONA -->
+    <section class="section section--grey" id="zona">
+      <div class="container split">
+        <div>
+          <p class="eyebrow reveal">06 — Zona de actuación</p>
+          <h2 class="reveal">Desde Algeciras, para todo el Campo de Gibraltar.</h2>
+          <p class="reveal muted">Y en el resto de la provincia de Cádiz y Andalucía bajo consulta.</p>
+        </div>
+        <ul class="towns reveal">
+          <li class="is-main">Algeciras</li>
+          <li>La Línea de la Concepción</li>
+          <li>San Roque</li>
+          <li>Los Barrios</li>
+          <li>Tarifa</li>
+          <li>Jimena de la Frontera</li>
+          <li>Castellar de la Frontera</li>
+          <li>Sotogrande</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="section" id="contacto">
+      <div class="container contact">
+        <div class="contact__info">
+          <p class="eyebrow reveal">07 — Contacto</p>
+          <h2 class="reveal">Hablemos de tu proyecto.</h2>
+          <p class="reveal muted">Cuéntanos qué necesitas y te responderemos con una primera valoración sin compromiso.</p>
+          <dl class="contact__list reveal">
+            <div><dt>Estudio</dt><dd>Algeciras, Cádiz<br><span class="todo">[Dirección por confirmar]</span></dd></div>
+            <div><dt>Teléfono</dt><dd><a href="tel:+34000000000" class="todo">[Teléfono por confirmar]</a></dd></div>
+            <div><dt>Email</dt><dd><a href="mailto:info@enriquesanchezpolo.es" class="todo">[Email por confirmar]</a></dd></div>
+            <div><dt>Horario</dt><dd>Lunes a viernes · 9:00 – 14:00 / 17:00 – 20:00</dd></div>
+          </dl>
+        </div>
+
+        <form class="form reveal" id="contact-form" novalidate>
+          <div class="form__row">
+            <label>Nombre<input type="text" name="nombre" required autocomplete="name"></label>
+            <label>Teléfono<input type="tel" name="telefono" autocomplete="tel"></label>
+          </div>
+          <label>Email<input type="email" name="email" required autocomplete="email"></label>
+          <label>Tipo de servicio
+            <select name="servicio">
+              <option>Proyecto de edificación</option>
+              <option>Tasación / valoración</option>
+              <option>Infraestructura eléctrica</option>
+              <option>Rehabilitación o reforma</option>
+              <option>Licencia o legalización</option>
+              <option>Peritación o informe</option>
+              <option>Otro</option>
+            </select>
+          </label>
+          <label>Mensaje<textarea name="mensaje" rows="5" required></textarea></label>
+          <label class="check"><input type="checkbox" required> He leído y acepto la política de privacidad.</label>
+          <button type="submit" class="btn">Enviar consulta</button>
+          <p class="form__status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="brand brand--footer">
+        <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg></span>
+        <span class="brand__text"><strong>Enrique Sánchez Polo</strong><small>Arquitecto · Algeciras</small></span>
+      </div>
+      <nav class="footer__links" aria-label="Pie">
+        <a href="#estudio">Estudio</a><a href="#servicios">Servicios</a><a href="#tipologias">Proyectos</a><a href="#contacto">Contacto</a>
+      </nav>
+      <p class="footer__legal">© <span id="year"></span> Enrique Sánchez Polo · Arquitecto colegiado COA Cádiz <span class="todo">[nº por confirmar]</span> · <a href="#">Aviso legal</a> · <a href="#">Privacidad</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
