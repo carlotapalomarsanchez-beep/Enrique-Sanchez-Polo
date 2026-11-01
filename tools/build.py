@@ -289,20 +289,18 @@ def project_cards(items):
     from urllib.parse import quote
     out = []
     for cat, c1, c2, t, d, svg in items:
-        serv, bullets = PROJECT_INFO[t]
+        serv = PROJECT_INFO[t][0]
         href = f"contacto.html?servicio={quote(serv)}&amp;tipo={quote(t)}#contact-form"
-        lis = "".join(f"<li>{x}</li>" for x in bullets)
         out.append(f'''          <article class="project reveal" data-cat="{cat}" tabindex="0" aria-label="{t}">
             <div class="project__img">
               <svg viewBox="0 0 400 280" aria-hidden="true">{animate_svg(svg)}</svg>
+              <a class="project__cta" href="{href}">Consultar <span aria-hidden="true">→</span></a>
             </div>
-            <div class="project__meta"><span>{c1}</span><span>{c2}</span></div>
             <h3>{t}</h3>
-            <p>{d}</p>
             <div class="project__details">
               <div class="project__details-inner">
-                <ul>{lis}</ul>
-                <a class="project__cta" href="{href}">Consultar <span aria-hidden="true">→</span></a>
+                <div class="project__meta"><span>{c1}</span><span>{c2}</span></div>
+                <p>{d}</p>
               </div>
             </div>
           </article>''')

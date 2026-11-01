@@ -266,7 +266,8 @@
       cosT = Math.cos(cur.th); sinT = Math.sin(cur.th);
       // a la derecha en la portada; se centra detrás del contenido al bajar
       cx = W * (baseCx - (baseCx - 0.5) * clamp(cur.c / 0.25));
-      canvas.style.opacity = (0.6 - 0.22 * clamp(cur.c / 0.15)).toFixed(3);
+      // tras la portada el dibujo queda muy suave para que destaquen los apartados
+      canvas.style.opacity = (0.6 - 0.44 * clamp(cur.c / 0.12)).toFixed(3);
       const c = cur.c;
       ctx.lineCap = 'round';
 
