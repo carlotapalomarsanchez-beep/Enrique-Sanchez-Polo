@@ -712,3 +712,9 @@ html.entering .curtain span { transform: scaleY(1); transition: none; }
 .journey .obra__text { color: #333; }
 .journey .steps p, .journey .clients p { color: #3d3d3d; }
 .js .journey [data-split].split-done .w { overflow: visible; }
+
+/* Cifras de la portada: columnas iguales, centradas y alineadas en la misma línea */
+.journey__hero .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content: stretch; gap: 40px 24px; max-width: 640px; }
+.journey__hero .stats li { align-items: center; text-align: center; }
+.journey__hero .stats strong { min-height: 1.05em; display: flex; align-items: flex-end; justify-content: center; font-size: clamp(34px, 3.4vw, 46px); }
+.journey__hero .stats .stats__text { font-size: clamp(20px, 1.9vw, 26px); min-height: calc(clamp(34px, 3.4vw, 46px) * 1.05); padding-top: 0; line-height: 1.1; }

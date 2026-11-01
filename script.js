@@ -324,6 +324,7 @@
       const base = project([0, 0, 0]);
       const ly = Math.min(base[1] + scale * 4.6, H - 70);
       const txt = phI === T.length - 1 && c > 0.98 ? 'Entrega · Certificado final de obra' : names[phI];
+      if (W > 600) {
       ctx.textAlign = 'center';
       ctx.fillStyle = 'rgba(138,106,53,0.9)';
       ctx.font = `600 ${W > 600 ? 12 : 11}px Manrope, sans-serif`;
@@ -331,6 +332,7 @@
       ctx.fillStyle = 'rgba(17,17,17,0.55)';
       ctx.font = `300 ${W > 600 ? 30 : 24}px Manrope, sans-serif`;
       ctx.fillText(`${Math.round(c * 100)}%`, base[0], ly + 38);
+      }
 
       // indicador de fase
       let ph = 0;
