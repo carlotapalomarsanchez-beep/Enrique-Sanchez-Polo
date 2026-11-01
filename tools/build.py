@@ -260,13 +260,53 @@ PROJECTS = [
      '<path class="ink" d="M40 60h320v180H40z"/><path class="ink" d="M40 140h140V60M180 140l80 100M260 60v80h100"/><path class="gold-stroke" d="M180 140h80v-80"/>'),
 ]
 
+# Al pasar por encima: servicio del formulario y tres puntos de información
+PROJECT_INFO = {
+    "Viviendas unifamiliares": ("Proyecto de edificación", ["Estudio de parcela y normativa", "Proyecto básico y de ejecución", "Licencia y dirección de obra"]),
+    "Edificios de viviendas": ("Proyecto de edificación", ["Promociones y vivienda protegida", "Estudio de viabilidad", "Coordinación con promotora y constructora"]),
+    "Centros de transformación y subestaciones": ("Infraestructura eléctrica", ["Obra civil y cimentaciones", "Edificios prefabricados y casetas", "Canalizaciones y tramitación"]),
+    "Naves industriales y logísticas": ("Proyecto de edificación", ["Naves y almacenes", "Licencia de actividad", "Estructura e instalaciones"]),
+    "Tasaciones inmobiliarias": ("Tasación / valoración", ["Herencias y compraventas", "Divorcios y repartos", "Solares y fincas rústicas"]),
+    "Rehabilitación de edificios": ("Rehabilitación o reforma", ["Fachadas y cubiertas", "Accesibilidad y ascensores", "Refuerzo estructural"]),
+    "Peritaciones y patologías": ("Peritación o informe", ["Informes judiciales y de parte", "Grietas y humedades", "Siniestros y aseguradoras"]),
+    "Locales y edificios terciarios": ("Licencia o legalización", ["Adecuación de locales", "Licencia de apertura", "Oficinas y hostelería"]),
+    "Legalizaciones, AFO y segregaciones": ("Licencia o legalización", ["Asimilado a Fuera de Ordenación", "Legalización de ampliaciones", "Segregaciones de fincas"]),
+}
+
+def animate_svg(svg):
+    """Prepara cada trazo para dibujarse de nuevo al pasar por encima."""
+    n = [0]
+    def rep(m):
+        tag = m.group(0)
+        if "stroke-dasharray" in tag:
+            return tag
+        n[0] += 1
+        tag = tag.replace(m.group(1), f'{m.group(1)} pathLength="1" style="--i:{n[0] - 1}"', 1)
+        return re.sub(r'class="([^"]*)"', lambda k: f'class="{k.group(1)} u"', tag, count=1)
+    return re.sub(r"(<path|<circle)[^>]*>", rep, svg)
+
 def project_cards(items):
-    return "\n".join(f'''          <article class="project reveal" data-cat="{cat}">
-            <div class="project__img"><svg viewBox="0 0 400 280" aria-hidden="true">{svg}</svg><span class="project__more">Consultar →</span></div>
+    from urllib.parse import quote
+    out = []
+    for cat, c1, c2, t, d, svg in items:
+        serv, bullets = PROJECT_INFO[t]
+        href = f"contacto.html?servicio={quote(serv)}&amp;tipo={quote(t)}#contact-form"
+        lis = "".join(f"<li>{x}</li>" for x in bullets)
+        out.append(f'''          <article class="project reveal" data-cat="{cat}" tabindex="0" aria-label="{t}">
+            <div class="project__img">
+              <svg viewBox="0 0 400 280" aria-hidden="true">{animate_svg(svg)}</svg>
+            </div>
             <div class="project__meta"><span>{c1}</span><span>{c2}</span></div>
             <h3>{t}</h3>
             <p>{d}</p>
-          </article>''' for cat, c1, c2, t, d, svg in items)
+            <div class="project__details">
+              <div class="project__details-inner">
+                <ul>{lis}</ul>
+                <a class="project__cta" href="{href}">Consultar <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>''')
+    return "\n".join(out)
 
 STEPS = '''
     <section class="section section--dark">

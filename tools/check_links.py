@@ -30,6 +30,7 @@ for name, p in pages.items():
             if link == "#": print(f"{name}: enlace vacío '#'"); errors += 1
             continue
         path, _, anchor = link.partition("#")
+        path = path.split("?", 1)[0]
         target = name if not path else path
         if name == "404.html" and path.startswith("/Enrique-Sanchez-Polo/"):
             target = path.split("/Enrique-Sanchez-Polo/", 1)[1] or "index.html"

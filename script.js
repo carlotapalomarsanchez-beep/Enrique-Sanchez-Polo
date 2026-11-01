@@ -421,6 +421,24 @@
     t.addEventListener('mouseleave', () => setTown(null));
   });
 
+  /* ---------- Tarjetas de proyecto: abrir con toque o teclado ---------- */
+  projects.forEach(card => {
+    card.addEventListener('click', e => {
+      if (e.target.closest('a')) return;
+      if (window.matchMedia('(hover: hover)').matches) return;
+      const open = !card.classList.contains('is-open');
+      projects.forEach(p => p.classList.remove('is-open'));
+      card.classList.toggle('is-open', open);
+    });
+    card.addEventListener('keydown', e => {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target === card) {
+        e.preventDefault();
+        card.classList.toggle('is-open');
+        if (card.classList.contains('is-open')) $('.project__cta', card).focus();
+      }
+    });
+  });
+
   /* ---------- Email protegido contra robots ---------- */
   // El email no aparece escrito en el HTML: se compone aquí.
   const emailLinks = $$('.js-email');
@@ -435,6 +453,16 @@
   const form = $('#contact-form');
   if (form) {
     const status = $('.form__status', form);
+    const params = new URLSearchParams(location.search);
+    const serv = params.get('servicio');
+    const tipo = params.get('tipo');
+    if (serv) {
+      const opt = [...form.elements.servicio.options].find(o => o.value === serv || o.text === serv);
+      if (opt) form.elements.servicio.value = opt.value || opt.text;
+    }
+    if (tipo && !form.elements.mensaje.value) {
+      form.elements.mensaje.value = `Hola, me gustaría consultar sobre: ${tipo.slice(0, 80)}.\n\n`;
+    }
     const loadedAt = Date.now();
     let submitting = false;
     const submitBtn = $('button[type=submit]', form);

@@ -170,7 +170,6 @@ p { margin: 0 0 1.1em; }
 .project.is-hidden { display: none; }
 .project__img { background: var(--bg-soft); aspect-ratio: 10 / 7; margin-bottom: 22px; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; }
 .project__img svg { width: 82%; transition: transform .7s var(--ease); }
-.project:hover .project__img svg { transform: scale(1.05); }
 .project__img .ink { stroke: var(--ink); stroke-width: 1.4; fill: none; }
 .project__img .gold-stroke { stroke: var(--gold); stroke-width: 2; fill: none; }
 .project__meta { display: flex; gap: 14px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-ink); font-weight: 600; margin-bottom: 10px; }
@@ -388,10 +387,35 @@ html.entering .curtain span { transform: scaleY(1); transition: none; }
 .service:target::before { width: 100%; }
 
 /* Proyectos */
-.project__more { position: absolute; left: 20px; bottom: 18px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--gold-ink); opacity: 0; transform: translateY(8px); transition: all .4s var(--ease); }
-.project:hover .project__more { opacity: 1; transform: none; }
-.project__img::after { content: ""; position: absolute; inset: 0; border: 1px solid var(--gold); opacity: 0; transform: scale(.96); transition: all .5s var(--ease); }
-.project:hover .project__img::after { opacity: 1; transform: scale(1); }
+/* Tarjeta de proyecto: al pasar por encima el edificio se redibuja y la tarjeta se despliega con la información */
+.project { outline: none; }
+.project__img::after { content: ""; position: absolute; inset: 0; border: 1px solid var(--gold); opacity: 0; transform: scale(.96); transition: all .5s var(--ease); pointer-events: none; }
+.project__img .u { stroke-dasharray: 1; stroke-dashoffset: 0; }
+@keyframes unfold { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+.project__details { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .55s var(--ease); }
+.project__details-inner { overflow: hidden; min-height: 0; }
+.project__details ul { list-style: none; margin: 0; padding: 18px 0 16px; border-top: 1px solid var(--line); margin-top: 18px; }
+.project__details li { font-size: 14.5px; color: var(--ink); padding: 4px 0 4px 20px; position: relative; opacity: 0; transform: translateY(8px); transition: opacity .4s, transform .4s var(--ease); }
+.project__details li::before { content: ""; position: absolute; left: 0; top: 50%; width: 10px; height: 1px; background: var(--gold); }
+.project__cta { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 4px; padding: 12px 18px; background: var(--ink); color: #fff; font: 600 12px var(--sans); letter-spacing: .14em; text-transform: uppercase; transition: background .3s, gap .3s var(--ease); }
+.project__cta:hover, .project__cta:focus-visible { background: var(--gold-ink); gap: 12px; }
+
+/* estado abierto: ratón encima, foco de teclado o toque en móvil */
+.project.is-open .project__img::after, .project:focus-within .project__img::after { opacity: 1; transform: scale(1); }
+.project.is-open .project__img .u { animation: unfold 1.6s cubic-bezier(.55,.1,.35,1) calc(var(--i) * 260ms) both; }
+.project.is-open .project__details, .project:focus-within .project__details { grid-template-rows: 1fr; }
+.project.is-open .project__details li, .project:focus-within .project__details li { opacity: 1; transform: none; }
+@media (hover: hover) {
+  .project:hover .project__img::after { opacity: 1; transform: scale(1); }
+  .project:hover .project__img svg { transform: none; }
+  .project:hover .project__img .u { animation: unfold 1.6s cubic-bezier(.55,.1,.35,1) calc(var(--i) * 260ms) both; }
+  .project:hover .project__details { grid-template-rows: 1fr; }
+  .project:hover .project__details li { opacity: 1; transform: none; }
+}
+.project__details li:nth-child(2) { transition-delay: .07s; }
+.project__details li:nth-child(3) { transition-delay: .14s; }
+@media (hover: none) { .project { cursor: pointer; } }
+@media (prefers-reduced-motion: reduce) { .project .project__img .u { animation: none !important; } }
 .project.is-hidden { display: none; }
 .project.is-in { animation: popIn .6s var(--ease); }
 @keyframes popIn { from { opacity: 0; transform: translateY(20px) scale(.98); } }
