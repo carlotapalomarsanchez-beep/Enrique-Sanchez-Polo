@@ -545,26 +545,41 @@ contacto = page_hero("04", "Contacto", "Hablemos de <em class=\"gold\">tu proyec
       </div>
     </section>
 
-    <section class="section section--grey" id="zona">
-      <div class="container split">
-        <div>
-          <p class="eyebrow reveal">Zona de actuación</p>
-          <h2 data-split>Desde Algeciras, para todo el Campo de Gibraltar.</h2>
-          <p class="reveal muted">Y en el resto de la provincia de Cádiz y Andalucía bajo consulta.</p>
+    <section class="section section--grey zona" id="zona">
+      <div class="container">
+        <div class="section__head section__head--row">
+          <div>
+            <p class="eyebrow reveal">Zona de actuación</p>
+            <h2 data-split>Desde Algeciras, para todo el Campo de Gibraltar.</h2>
+          </div>
+          <p class="reveal muted zona__note">Y en el resto de la provincia de Cádiz y Andalucía bajo consulta.</p>
         </div>
-        <ul class="towns">
-          <li class="is-main reveal">Algeciras</li>
-          <li class="reveal">La Línea de la Concepción</li>
-          <li class="reveal">San Roque</li>
-          <li class="reveal">Los Barrios</li>
-          <li class="reveal">Tarifa</li>
-          <li class="reveal">Jimena de la Frontera</li>
-          <li class="reveal">Castellar de la Frontera</li>
-          <li class="reveal">Sotogrande</li>
-        </ul>
+        <div class="zona__grid">
+          <figure class="zona__main reveal">
+            @@MAP_MAIN@@
+            <figcaption><span class="legend legend--gold"></span> Campo de Gibraltar <span class="legend legend--dark"></span> Provincia de Cádiz <span class="legend"></span> Andalucía</figcaption>
+          </figure>
+          <div class="zona__detail reveal">
+            <p class="zona__kicker">Detalle · Campo de Gibraltar</p>
+            @@MAP_ZOOM@@
+            <ul class="town-list" aria-label="Municipios donde trabajamos">
+              <li><button type="button" class="town-chip is-main" data-town="algeciras">Algeciras</button></li>
+              <li><button type="button" class="town-chip" data-town="la-linea-de-la-concepcion">La Línea de la Concepción</button></li>
+              <li><button type="button" class="town-chip" data-town="san-roque">San Roque</button></li>
+              <li><button type="button" class="town-chip" data-town="los-barrios">Los Barrios</button></li>
+              <li><button type="button" class="town-chip" data-town="tarifa">Tarifa</button></li>
+              <li><button type="button" class="town-chip" data-town="jimena-de-la-frontera">Jimena de la Frontera</button></li>
+              <li><button type="button" class="town-chip" data-town="castellar-de-la-frontera">Castellar de la Frontera</button></li>
+              <li><button type="button" class="town-chip" data-town="sotogrande">Sotogrande</button></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 '''
+
+MAP_MAIN, MAP_ZOOM = pathlib.Path(__file__).with_name("map_fragment.html").read_text(encoding="utf-8").split("<!--ZOOM-->")
+contacto = contacto.replace("@@MAP_MAIN@@", MAP_MAIN.strip()).replace("@@MAP_ZOOM@@", MAP_ZOOM.strip())
 
 page("contacto", "Contacto · Enrique Sánchez Polo Arquitecto",
      "Contacta con el estudio de arquitectura de Enrique Sánchez Polo en Algeciras. Presupuesto sin compromiso.", contacto, cta=False)

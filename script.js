@@ -390,6 +390,24 @@
     });
   }));
 
+  /* ---------- Mapa: resaltar municipio ---------- */
+  const towns = $$('.town');
+  const setTown = slug => {
+    towns.forEach(t => t.classList.toggle('is-active', t.dataset.town === slug));
+    $$('.town-chip').forEach(c => c.classList.toggle('is-active', c.dataset.town === slug));
+  };
+  $$('.town-chip').forEach(c => {
+    c.addEventListener('mouseenter', () => setTown(c.dataset.town));
+    c.addEventListener('focus', () => setTown(c.dataset.town));
+    c.addEventListener('click', () => setTown(c.dataset.town));
+    c.addEventListener('mouseleave', () => setTown(null));
+    c.addEventListener('blur', () => setTown(null));
+  });
+  towns.forEach(t => {
+    t.addEventListener('mouseenter', () => setTown(t.dataset.town));
+    t.addEventListener('mouseleave', () => setTown(null));
+  });
+
   /* ---------- Email protegido contra robots ---------- */
   // El email no aparece escrito en el HTML: se compone aquí.
   const emailLinks = $$('.js-email');

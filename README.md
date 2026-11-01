@@ -19,6 +19,7 @@ Web estática del estudio. Abrir `index.html` en el navegador; no necesita insta
 ## Archivos
 - `styles.css` – diseño y efectos · `script.js` – animaciones, modelo 3D, formulario, cookies y Analytics
 - `tools/build.py` – genera todas las páginas (`python3 tools/build.py .`). **Los textos se editan aquí.**
+- `tools/make_map.py` – genera el mapa de puntos de Andalucía (`tools/map_fragment.html`) a partir del GeoJSON de provincias de [click_that_hood](https://github.com/codeforgermany/click_that_hood); solo hace falta si se cambian los municipios
 - `tools/check_links.py` – revisa enlaces rotos e imágenes sin texto alternativo (`python3 tools/check_links.py .`)
 - `sitemap.xml`, `robots.txt`, `site.webmanifest`, favicons, `og-image.png` (vista previa al compartir)
 
