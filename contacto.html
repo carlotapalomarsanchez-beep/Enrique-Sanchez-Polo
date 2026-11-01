@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contacto · Enrique Sánchez Polo Arquitecto</title>
+  <meta name="description" content="Contacta con el estudio de arquitectura de Enrique Sánchez Polo en Algeciras. Presupuesto sin compromiso.">
+  <script>
+    document.documentElement.classList.add('js');
+    (function (r) {
+      var seen = false;
+      try { seen = !!sessionStorage.getItem('esp-intro'); } catch (e) {}
+      r.classList.add(seen ? 'entering' : 'first-visit');
+      setTimeout(function () { r.classList.remove('entering'); }, 2500);
+    })(document.documentElement);
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23fff'/%3E%3Cpath d='M14 50V22l18-10 18 10v28' fill='none' stroke='%23B08D57' stroke-width='3'/%3E%3Cpath d='M26 50V34h12v16' fill='none' stroke='%23111' stroke-width='3'/%3E%3C/svg%3E">
+</head>
+<body data-page="contacto">
+
+  <!-- Animación de entrada (solo la primera visita) -->
+  <div class="intro" aria-hidden="true">
+    <div class="intro__panel intro__panel--a"></div>
+    <div class="intro__panel intro__panel--b"></div>
+    <div class="intro__content">
+      <svg class="intro__logo" viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg>
+      <p class="intro__name"><span>Enrique</span> <span>Sánchez</span> <span>Polo</span></p>
+      <p class="intro__role">Arquitecto · Algeciras</p>
+      <div class="intro__bar"><span></span></div>
+      <p class="intro__count"><span class="intro__num">0</span>%</p>
+    </div>
+  </div>
+
+  <!-- Transición entre páginas -->
+  <div class="curtain" aria-hidden="true"><span></span><span></span></div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+  <div class="cursor" aria-hidden="true"></div>
+
+  <header class="nav" id="top">
+    <div class="nav__inner">
+      <a href="index.html" class="brand" aria-label="Inicio">
+        <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg></span>
+        <span class="brand__text"><strong>Enrique Sánchez Polo</strong><small>Arquitecto</small></span>
+      </a>
+      <button class="nav__toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
+      <nav class="nav__links" aria-label="Principal">
+        <a href="index.html">Inicio</a>
+        <a href="estudio.html">Estudio</a>
+        <div class="nav__item has-sub">
+          <a href="servicios.html">Servicios <i class="chev" aria-hidden="true"></i></a>
+          <div class="sub">
+            <div class="sub__inner">
+              <p class="sub__title">Servicios</p>
+              <a href="servicios.html#edificacion">Proyectos de edificación</a>
+              <a href="servicios.html#tasaciones">Tasaciones y valoraciones</a>
+              <a href="servicios.html#electricas">Infraestructuras eléctricas</a>
+              <a href="servicios.html#rehabilitacion">Rehabilitación y reforma</a>
+              <a href="servicios.html#licencias">Licencias y legalizaciones</a>
+              <a href="servicios.html#peritaciones">Peritaciones e informes</a>
+              <a href="servicios.html#direccion">Dirección de obra</a>
+              <a href="servicios.html#industrial">Naves industriales</a>
+              <a href="servicios.html" class="sub__all">Ver los 12 servicios →</a>
+            </div>
+          </div>
+        </div>
+        <a href="proyectos.html">Proyectos</a>
+        <a href="contacto.html" class="is-active" aria-current="page" data-btn>Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="container page-hero__grid">
+        <div>
+          <p class="crumbs reveal"><a href="index.html">Inicio</a> <span>/</span> Contacto</p>
+          <p class="eyebrow reveal">04 — Contacto</p>
+          <h1 data-split>Hablemos de <em class="gold">tu proyecto.</em></h1>
+          <p class="lead reveal">Cuéntanos qué necesitas y te responderemos con una primera valoración sin compromiso.</p>
+        </div>
+        <div class="page-hero__art" aria-hidden="true" data-parallax="0.12">
+          <svg viewBox="0 0 400 320" class="drawing"><g class="ink"><path class="draw" d="M60 90h280v180H60z"/><path class="draw" d="M60 90l140 100 140-100"/></g><g class="gold-line"><path class="draw" d="M40 300h320"/><circle class="draw" cx="330" cy="80" r="18"/></g></svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container contact">
+        <div class="contact__info">
+          <h2 data-split>Datos del estudio.</h2>
+          <dl class="contact__list reveal">
+            <div><dt>Estudio</dt><dd>Algeciras, Cádiz<br><span class="todo">[Dirección por confirmar]</span></dd></div>
+            <div><dt>Teléfono</dt><dd><a href="tel:+34000000000" class="todo">[Teléfono por confirmar]</a></dd></div>
+            <div><dt>Email</dt><dd><a href="mailto:info@enriquesanchezpolo.es" class="todo">[Email por confirmar]</a></dd></div>
+            <div><dt>Horario</dt><dd>Lunes a viernes · 9:00 – 14:00 / 17:00 – 20:00</dd></div>
+          </dl>
+        </div>
+
+        <form class="form reveal" id="contact-form" novalidate>
+          <div class="form__row">
+            <label>Nombre<input type="text" name="nombre" required autocomplete="name"></label>
+            <label>Teléfono<input type="tel" name="telefono" autocomplete="tel"></label>
+          </div>
+          <label>Email<input type="email" name="email" required autocomplete="email"></label>
+          <label>Tipo de servicio
+            <select name="servicio">
+              <option>Proyecto de edificación</option>
+              <option>Tasación / valoración</option>
+              <option>Infraestructura eléctrica</option>
+              <option>Rehabilitación o reforma</option>
+              <option>Licencia o legalización</option>
+              <option>Peritación o informe</option>
+              <option>Otro</option>
+            </select>
+          </label>
+          <label>Mensaje<textarea name="mensaje" rows="5" required></textarea></label>
+          <label class="check"><input type="checkbox" required> He leído y acepto la política de privacidad.</label>
+          <button type="submit" class="btn magnetic">Enviar consulta</button>
+          <p class="form__status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section section--grey" id="zona">
+      <div class="container split">
+        <div>
+          <p class="eyebrow reveal">Zona de actuación</p>
+          <h2 data-split>Desde Algeciras, para todo el Campo de Gibraltar.</h2>
+          <p class="reveal muted">Y en el resto de la provincia de Cádiz y Andalucía bajo consulta.</p>
+        </div>
+        <ul class="towns">
+          <li class="is-main reveal">Algeciras</li>
+          <li class="reveal">La Línea de la Concepción</li>
+          <li class="reveal">San Roque</li>
+          <li class="reveal">Los Barrios</li>
+          <li class="reveal">Tarifa</li>
+          <li class="reveal">Jimena de la Frontera</li>
+          <li class="reveal">Castellar de la Frontera</li>
+          <li class="reveal">Sotogrande</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="brand brand--footer">
+        <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg></span>
+        <span class="brand__text"><strong>Enrique Sánchez Polo</strong><small>Arquitecto · Algeciras</small></span>
+      </div>
+      <nav class="footer__links" aria-label="Pie">
+        <a href="index.html">Inicio</a><a href="estudio.html">Estudio</a><a href="servicios.html">Servicios</a><a href="proyectos.html">Proyectos</a><a href="contacto.html">Contacto</a>
+      </nav>
+      <p class="footer__legal">© <span id="year"></span> Enrique Sánchez Polo · Arquitecto colegiado COA Cádiz <span class="todo">[nº por confirmar]</span> · <a href="#">Aviso legal</a> · <a href="#">Privacidad</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

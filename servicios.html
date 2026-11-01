@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Servicios · Enrique Sánchez Polo Arquitecto</title>
+  <meta name="description" content="Edificación, tasaciones, infraestructuras eléctricas, rehabilitación, licencias, AFO, peritaciones, dirección de obra y más en Algeciras.">
+  <script>
+    document.documentElement.classList.add('js');
+    (function (r) {
+      var seen = false;
+      try { seen = !!sessionStorage.getItem('esp-intro'); } catch (e) {}
+      r.classList.add(seen ? 'entering' : 'first-visit');
+      setTimeout(function () { r.classList.remove('entering'); }, 2500);
+    })(document.documentElement);
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23fff'/%3E%3Cpath d='M14 50V22l18-10 18 10v28' fill='none' stroke='%23B08D57' stroke-width='3'/%3E%3Cpath d='M26 50V34h12v16' fill='none' stroke='%23111' stroke-width='3'/%3E%3C/svg%3E">
+</head>
+<body data-page="servicios">
+
+  <!-- Animación de entrada (solo la primera visita) -->
+  <div class="intro" aria-hidden="true">
+    <div class="intro__panel intro__panel--a"></div>
+    <div class="intro__panel intro__panel--b"></div>
+    <div class="intro__content">
+      <svg class="intro__logo" viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg>
+      <p class="intro__name"><span>Enrique</span> <span>Sánchez</span> <span>Polo</span></p>
+      <p class="intro__role">Arquitecto · Algeciras</p>
+      <div class="intro__bar"><span></span></div>
+      <p class="intro__count"><span class="intro__num">0</span>%</p>
+    </div>
+  </div>
+
+  <!-- Transición entre páginas -->
+  <div class="curtain" aria-hidden="true"><span></span><span></span></div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+  <div class="cursor" aria-hidden="true"></div>
+
+  <header class="nav" id="top">
+    <div class="nav__inner">
+      <a href="index.html" class="brand" aria-label="Inicio">
+        <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg></span>
+        <span class="brand__text"><strong>Enrique Sánchez Polo</strong><small>Arquitecto</small></span>
+      </a>
+      <button class="nav__toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
+      <nav class="nav__links" aria-label="Principal">
+        <a href="index.html">Inicio</a>
+        <a href="estudio.html">Estudio</a>
+        <div class="nav__item has-sub">
+          <a href="servicios.html" class="is-active" aria-current="page">Servicios <i class="chev" aria-hidden="true"></i></a>
+          <div class="sub">
+            <div class="sub__inner">
+              <p class="sub__title">Servicios</p>
+              <a href="servicios.html#edificacion">Proyectos de edificación</a>
+              <a href="servicios.html#tasaciones">Tasaciones y valoraciones</a>
+              <a href="servicios.html#electricas">Infraestructuras eléctricas</a>
+              <a href="servicios.html#rehabilitacion">Rehabilitación y reforma</a>
+              <a href="servicios.html#licencias">Licencias y legalizaciones</a>
+              <a href="servicios.html#peritaciones">Peritaciones e informes</a>
+              <a href="servicios.html#direccion">Dirección de obra</a>
+              <a href="servicios.html#industrial">Naves industriales</a>
+              <a href="servicios.html" class="sub__all">Ver los 12 servicios →</a>
+            </div>
+          </div>
+        </div>
+        <a href="proyectos.html">Proyectos</a>
+        <a href="contacto.html" data-btn>Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="container page-hero__grid">
+        <div>
+          <p class="crumbs reveal"><a href="index.html">Inicio</a> <span>/</span> Servicios</p>
+          <p class="eyebrow reveal">02 — Servicios</p>
+          <h1 data-split>Todo lo que tu proyecto necesita, <em class="gold">en un mismo estudio.</em></h1>
+          <p class="lead reveal">Servicios profesionales de arquitectura con visado colegial, desde la idea inicial hasta el certificado final de obra.</p>
+        </div>
+        <div class="page-hero__art" aria-hidden="true" data-parallax="0.12">
+          <svg viewBox="0 0 400 320" class="drawing"><g class="ink"><path class="draw" d="M40 290h320"/><path class="draw" d="M70 290V170h100v120"/><path class="draw" d="M100 290v-60h40v60"/></g><g class="gold-line"><path class="draw" d="M260 290V60M235 85h50M222 120h76M260 60l-25 25M260 60l25 25M170 190l90-70M298 120l52 60v110"/></g></svg>
+        </div>
+      </div>
+    </section>
+
+    <nav class="chips" aria-label="Ir a servicio"><div class="container chips__inner"><a href="#edificacion">Proyectos de edificación</a><a href="#tasaciones">Tasaciones y valoraciones</a><a href="#electricas">Infraestructuras eléctricas</a><a href="#rehabilitacion">Rehabilitación y reforma</a><a href="#licencias">Licencias y actividades</a><a href="#legalizaciones">Legalizaciones y AFO</a><a href="#peritaciones">Peritaciones e informes</a><a href="#direccion">Dirección de obra</a><a href="#industrial">Naves y proyectos industriales</a><a href="#eficiencia">Eficiencia energética</a><a href="#ite">ITE / IEE</a><a href="#urbanismo">Urbanismo y suelo</a></div></nav>
+    <section class="section">
+      <div class="container">
+        <div class="services services--detailed">
+          <article class="service reveal tilt" id="edificacion">
+            <span class="service__num">01</span>
+            <h3>Proyectos de edificación</h3>
+            <p>Proyecto básico y de ejecución de viviendas unifamiliares, plurifamiliares, locales y edificios de uso terciario. Obra nueva y ampliaciones.</p><ul class="service__list"><li>Vivienda unifamiliar y plurifamiliar</li><li>Ampliaciones y remontes</li><li>Edificios terciarios y equipamientos</li></ul>
+          </article>
+          <article class="service service--featured reveal tilt" id="tasaciones">
+            <span class="service__num">02</span>
+            <h3>Tasaciones y valoraciones</h3>
+            <p>Valoración de inmuebles, solares y fincas rústicas. Tasaciones para herencias, divorcios, compraventas, expropiaciones y fines hipotecarios.</p><ul class="service__list"><li>Herencias y repartos</li><li>Compraventas y divorcios</li><li>Expropiaciones y valor catastral</li></ul>
+          </article>
+          <article class="service service--featured reveal tilt" id="electricas">
+            <span class="service__num">03</span>
+            <h3>Infraestructuras eléctricas</h3>
+            <p>Proyectos de obra civil para centros de transformación, subestaciones, líneas de media y baja tensión, canalizaciones y edificaciones técnicas.</p><ul class="service__list"><li>Centros de transformación</li><li>Subestaciones y casetas técnicas</li><li>Canalizaciones y zanjas</li></ul>
+          </article>
+          <article class="service reveal tilt" id="rehabilitacion">
+            <span class="service__num">04</span>
+            <h3>Rehabilitación y reforma</h3>
+            <p>Reformas integrales, rehabilitación de fachadas y cubiertas, cambios de uso, adecuación de locales y mejora de la accesibilidad.</p><ul class="service__list"><li>Reformas integrales</li><li>Fachadas y cubiertas</li><li>Accesibilidad y ascensores</li></ul>
+          </article>
+          <article class="service reveal tilt" id="licencias">
+            <span class="service__num">05</span>
+            <h3>Licencias y actividades</h3>
+            <p>Licencias de obra, de apertura y de actividad, declaraciones responsables y licencias de primera ocupación o utilización.</p><ul class="service__list"><li>Licencia de obra</li><li>Apertura y actividad</li><li>Primera ocupación</li></ul>
+          </article>
+          <article class="service reveal tilt" id="legalizaciones">
+            <span class="service__num">06</span>
+            <h3>Legalizaciones y AFO</h3>
+            <p>Legalización de edificaciones existentes y expedientes de Asimilado a Fuera de Ordenación según la normativa andaluza (LISTA).</p><ul class="service__list"><li>Asimilado a Fuera de Ordenación</li><li>Legalización de ampliaciones</li><li>Regularización catastral</li></ul>
+          </article>
+          <article class="service reveal tilt" id="peritaciones">
+            <span class="service__num">07</span>
+            <h3>Peritaciones e informes</h3>
+            <p>Informes periciales judiciales y de parte, dictámenes de patologías, humedades, grietas, vicios constructivos y daños por siniestros.</p><ul class="service__list"><li>Periciales judiciales</li><li>Patologías y humedades</li><li>Siniestros y aseguradoras</li></ul>
+          </article>
+          <article class="service reveal tilt" id="direccion">
+            <span class="service__num">08</span>
+            <h3>Dirección de obra</h3>
+            <p>Dirección facultativa, control de calidad, coordinación de seguridad y salud y certificación final de obra.</p><ul class="service__list"><li>Dirección facultativa</li><li>Seguridad y salud</li><li>Certificado final de obra</li></ul>
+          </article>
+          <article class="service reveal tilt" id="industrial">
+            <span class="service__num">09</span>
+            <h3>Naves y proyectos industriales</h3>
+            <p>Naves industriales y logísticas, almacenes, talleres y edificios vinculados a la actividad portuaria y empresarial de la comarca.</p><ul class="service__list"><li>Naves y almacenes</li><li>Talleres</li><li>Logística portuaria</li></ul>
+          </article>
+          <article class="service reveal tilt" id="eficiencia">
+            <span class="service__num">10</span>
+            <h3>Eficiencia energética</h3>
+            <p>Certificados energéticos, auditorías y propuestas de mejora: aislamiento, envolvente, instalaciones y energías renovables.</p><ul class="service__list"><li>Certificado energético</li><li>Auditorías</li><li>Mejora de la envolvente</li></ul>
+          </article>
+          <article class="service reveal tilt" id="ite">
+            <span class="service__num">11</span>
+            <h3>ITE / IEE</h3>
+            <p>Inspección Técnica de Edificios e Informe de Evaluación del Edificio para comunidades de propietarios y administradores de fincas.</p><ul class="service__list"><li>Inspección técnica</li><li>Informe de evaluación</li><li>Plan de actuaciones</li></ul>
+          </article>
+          <article class="service reveal tilt" id="urbanismo">
+            <span class="service__num">12</span>
+            <h3>Urbanismo y suelo</h3>
+            <p>Segregaciones, agrupaciones, levantamientos planimétricos, estudios de detalle, informes urbanísticos y viabilidad de solares.</p><ul class="service__list"><li>Segregaciones</li><li>Levantamientos</li><li>Viabilidad de solares</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track"><span>Edificación</span><i>✦</i><span>Tasaciones</span><i>✦</i><span>Infraestructuras eléctricas</span><i>✦</i><span>Rehabilitación</span><i>✦</i><span>Licencias</span><i>✦</i><span>Legalizaciones AFO</span><i>✦</i><span>Peritaciones</span><i>✦</i><span>Dirección de obra</span><i>✦</i><span>Naves industriales</span><i>✦</i><span>Eficiencia energética</span><i>✦</i><span>ITE / IEE</span><i>✦</i><span>Urbanismo</span><i>✦</i><span>Edificación</span><i>✦</i><span>Tasaciones</span><i>✦</i><span>Infraestructuras eléctricas</span><i>✦</i><span>Rehabilitación</span><i>✦</i><span>Licencias</span><i>✦</i><span>Legalizaciones AFO</span><i>✦</i><span>Peritaciones</span><i>✦</i><span>Dirección de obra</span><i>✦</i><span>Naves industriales</span><i>✦</i><span>Eficiencia energética</span><i>✦</i><span>ITE / IEE</span><i>✦</i><span>Urbanismo</span><i>✦</i></div>
+    </div>
+
+    <section class="section section--dark">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow reveal">Método de trabajo</p>
+          <h2 data-split>Un proceso claro, sin sorpresas.</h2>
+        </div>
+        <ol class="steps">
+          <li class="reveal"><span class="steps__n">01</span><h3>Primera reunión</h3><p>Escuchamos tus necesidades, visitamos el inmueble o la parcela y analizamos la normativa aplicable.</p></li>
+          <li class="reveal"><span class="steps__n">02</span><h3>Propuesta y presupuesto</h3><p>Te entregamos una propuesta de honorarios cerrada, con plazos y alcance de cada fase.</p></li>
+          <li class="reveal"><span class="steps__n">03</span><h3>Proyecto y tramitación</h3><p>Redactamos la documentación técnica, la visamos y la presentamos ante ayuntamiento, Junta o compañía.</p></li>
+          <li class="reveal"><span class="steps__n">04</span><h3>Obra y entrega</h3><p>Dirigimos la ejecución, controlamos calidad y costes y emitimos el certificado final de obra.</p></li>
+        </ol>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="cta-band">
+    <div class="container cta-band__inner">
+      <h2 data-split>¿Tienes un proyecto en mente?</h2>
+      <a href="contacto.html" class="btn btn--gold magnetic">Hablemos <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="brand brand--footer">
+        <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg></span>
+        <span class="brand__text"><strong>Enrique Sánchez Polo</strong><small>Arquitecto · Algeciras</small></span>
+      </div>
+      <nav class="footer__links" aria-label="Pie">
+        <a href="index.html">Inicio</a><a href="estudio.html">Estudio</a><a href="servicios.html">Servicios</a><a href="proyectos.html">Proyectos</a><a href="contacto.html">Contacto</a>
+      </nav>
+      <p class="footer__legal">© <span id="year"></span> Enrique Sánchez Polo · Arquitecto colegiado COA Cádiz <span class="todo">[nº por confirmar]</span> · <a href="#">Aviso legal</a> · <a href="#">Privacidad</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

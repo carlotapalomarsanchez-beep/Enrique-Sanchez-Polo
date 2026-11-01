@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estudio · Enrique Sánchez Polo Arquitecto</title>
+  <meta name="description" content="Conoce el estudio de arquitectura de Enrique Sánchez Polo en Algeciras: más de 25 años de experiencia en el Campo de Gibraltar.">
+  <script>
+    document.documentElement.classList.add('js');
+    (function (r) {
+      var seen = false;
+      try { seen = !!sessionStorage.getItem('esp-intro'); } catch (e) {}
+      r.classList.add(seen ? 'entering' : 'first-visit');
+      setTimeout(function () { r.classList.remove('entering'); }, 2500);
+    })(document.documentElement);
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23fff'/%3E%3Cpath d='M14 50V22l18-10 18 10v28' fill='none' stroke='%23B08D57' stroke-width='3'/%3E%3Cpath d='M26 50V34h12v16' fill='none' stroke='%23111' stroke-width='3'/%3E%3C/svg%3E">
+</head>
+<body data-page="estudio">
+
+  <!-- Animación de entrada (solo la primera visita) -->
+  <div class="intro" aria-hidden="true">
+    <div class="intro__panel intro__panel--a"></div>
+    <div class="intro__panel intro__panel--b"></div>
+    <div class="intro__content">
+      <svg class="intro__logo" viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg>
+      <p class="intro__name"><span>Enrique</span> <span>Sánchez</span> <span>Polo</span></p>
+      <p class="intro__role">Arquitecto · Algeciras</p>
+      <div class="intro__bar"><span></span></div>
+      <p class="intro__count"><span class="intro__num">0</span>%</p>
+    </div>
+  </div>
+
+  <!-- Transición entre páginas -->
+  <div class="curtain" aria-hidden="true"><span></span><span></span></div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+  <div class="cursor" aria-hidden="true"></div>
+
+  <header class="nav" id="top">
+    <div class="nav__inner">
+      <a href="index.html" class="brand" aria-label="Inicio">
+        <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg></span>
+        <span class="brand__text"><strong>Enrique Sánchez Polo</strong><small>Arquitecto</small></span>
+      </a>
+      <button class="nav__toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
+      <nav class="nav__links" aria-label="Principal">
+        <a href="index.html">Inicio</a>
+        <a href="estudio.html" class="is-active" aria-current="page">Estudio</a>
+        <div class="nav__item has-sub">
+          <a href="servicios.html">Servicios <i class="chev" aria-hidden="true"></i></a>
+          <div class="sub">
+            <div class="sub__inner">
+              <p class="sub__title">Servicios</p>
+              <a href="servicios.html#edificacion">Proyectos de edificación</a>
+              <a href="servicios.html#tasaciones">Tasaciones y valoraciones</a>
+              <a href="servicios.html#electricas">Infraestructuras eléctricas</a>
+              <a href="servicios.html#rehabilitacion">Rehabilitación y reforma</a>
+              <a href="servicios.html#licencias">Licencias y legalizaciones</a>
+              <a href="servicios.html#peritaciones">Peritaciones e informes</a>
+              <a href="servicios.html#direccion">Dirección de obra</a>
+              <a href="servicios.html#industrial">Naves industriales</a>
+              <a href="servicios.html" class="sub__all">Ver los 12 servicios →</a>
+            </div>
+          </div>
+        </div>
+        <a href="proyectos.html">Proyectos</a>
+        <a href="contacto.html" data-btn>Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="container page-hero__grid">
+        <div>
+          <p class="crumbs reveal"><a href="index.html">Inicio</a> <span>/</span> Estudio</p>
+          <p class="eyebrow reveal">01 — Estudio</p>
+          <h1 data-split>Más de 25 años de oficio, <em class="gold">un único interlocutor.</em></h1>
+          <p class="lead reveal">Un estudio de arquitectura de Algeciras con vocación técnica, trato cercano y conocimiento profundo del Campo de Gibraltar.</p>
+        </div>
+        <div class="page-hero__art" aria-hidden="true" data-parallax="0.12">
+          <svg viewBox="0 0 400 320" class="drawing"><g class="ink"><path class="draw" d="M40 290h320"/><path class="draw" d="M80 290V130h120v160"/><path class="draw" d="M200 290V90h120v200"/><path class="draw" d="M110 170h60v40h-60zM230 130h60v40h-60zM230 210h60v40h-60z"/></g><g class="gold-line"><path class="draw" d="M60 305h280"/><path class="draw" d="M200 90l60-40 60 40"/></g></svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split">
+        <div>
+          <p class="eyebrow reveal">Quiénes somos</p>
+          <h2 data-split>Arquitectura útil, bien hecha y a tiempo.</h2>
+        </div>
+        <div class="split__body">
+          <p class="reveal">El estudio de <strong>Enrique Sánchez Polo</strong> nace en Algeciras con una idea sencilla: que cada proyecto, desde una vivienda unifamiliar hasta un centro de transformación, se resuelva con el mismo rigor técnico, claridad y cumplimiento de plazos.</p>
+          <p class="reveal">A lo largo de más de 25 años, el estudio ha acompañado a particulares, comunidades de propietarios, empresas, promotoras, entidades financieras y compañías del sector energético en todas las fases: estudio previo, proyecto, tramitación de licencias, dirección de obra, legalización y valoración.</p>
+          <p class="reveal">Conocemos la normativa urbanística de los municipios del Campo de Gibraltar, los procedimientos ante la Junta de Andalucía y las particularidades del clima y del entorno costero. Esa experiencia local se traduce en proyectos que se aprueban, se construyen y funcionan.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--grey">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow reveal">Valores</p>
+          <h2 data-split>Cuatro principios en cada encargo.</h2>
+        </div>
+        <div class="pillars">
+          <article class="pillar reveal"><span class="pillar__icon"><svg viewBox="0 0 48 48"><path d="M8 40h32M12 40V18l12-8 12 8v22"/><path class="g" d="M20 40V28h8v12"/></svg></span><h3>Rigor técnico</h3><p>Cálculo, normativa y documentación impecables. Proyectos que se visan y se aprueban a la primera.</p></article>
+          <article class="pillar reveal"><span class="pillar__icon"><svg viewBox="0 0 48 48"><circle cx="24" cy="18" r="8"/><path class="g" d="M10 42c2-8 8-12 14-12s12 4 14 12"/></svg></span><h3>Trato directo</h3><p>Hablas siempre con el arquitecto. Sin intermediarios ni cambios de interlocutor.</p></article>
+          <article class="pillar reveal"><span class="pillar__icon"><svg viewBox="0 0 48 48"><path d="M24 44s14-12 14-24a14 14 0 0 0-28 0c0 12 14 24 14 24z"/><circle class="g" cx="24" cy="20" r="5"/></svg></span><h3>Conocimiento local</h3><p>Normativa de cada municipio, clima del Estrecho y tramitación ante la Junta de Andalucía.</p></article>
+          <article class="pillar reveal"><span class="pillar__icon"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><path class="g" d="M24 13v11l7 5"/></svg></span><h3>Plazos cumplidos</h3><p>Calendario cerrado desde el primer día y seguimiento continuo de cada fase.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split">
+        <div>
+          <p class="eyebrow reveal">Para quién trabajamos</p>
+          <h2 data-split>Particulares, empresas e instituciones.</h2>
+        </div>
+        <ul class="clients">
+          <li class="reveal"><h3>Particulares</h3><p>Viviendas, reformas, tasaciones, herencias y legalizaciones.</p></li>
+          <li class="reveal"><h3>Comunidades de propietarios</h3><p>ITE, rehabilitación, accesibilidad y patologías.</p></li>
+          <li class="reveal"><h3>Empresas y promotoras</h3><p>Naves, locales, promociones y licencias de actividad.</p></li>
+          <li class="reveal"><h3>Sector energético</h3><p>Obra civil de infraestructuras eléctricas y edificaciones técnicas.</p></li>
+          <li class="reveal"><h3>Entidades financieras y aseguradoras</h3><p>Valoraciones, peritaciones y informes de daños.</p></li>
+          <li class="reveal"><h3>Despachos de abogados</h3><p>Informes periciales y dictámenes técnicos para procedimientos judiciales.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--dark">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow reveal">Método de trabajo</p>
+          <h2 data-split>Un proceso claro, sin sorpresas.</h2>
+        </div>
+        <ol class="steps">
+          <li class="reveal"><span class="steps__n">01</span><h3>Primera reunión</h3><p>Escuchamos tus necesidades, visitamos el inmueble o la parcela y analizamos la normativa aplicable.</p></li>
+          <li class="reveal"><span class="steps__n">02</span><h3>Propuesta y presupuesto</h3><p>Te entregamos una propuesta de honorarios cerrada, con plazos y alcance de cada fase.</p></li>
+          <li class="reveal"><span class="steps__n">03</span><h3>Proyecto y tramitación</h3><p>Redactamos la documentación técnica, la visamos y la presentamos ante ayuntamiento, Junta o compañía.</p></li>
+          <li class="reveal"><span class="steps__n">04</span><h3>Obra y entrega</h3><p>Dirigimos la ejecución, controlamos calidad y costes y emitimos el certificado final de obra.</p></li>
+        </ol>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="cta-band">
+    <div class="container cta-band__inner">
+      <h2 data-split>¿Tienes un proyecto en mente?</h2>
+      <a href="contacto.html" class="btn btn--gold magnetic">Hablemos <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="brand brand--footer">
+        <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg></span>
+        <span class="brand__text"><strong>Enrique Sánchez Polo</strong><small>Arquitecto · Algeciras</small></span>
+      </div>
+      <nav class="footer__links" aria-label="Pie">
+        <a href="index.html">Inicio</a><a href="estudio.html">Estudio</a><a href="servicios.html">Servicios</a><a href="proyectos.html">Proyectos</a><a href="contacto.html">Contacto</a>
+      </nav>
+      <p class="footer__legal">© <span id="year"></span> Enrique Sánchez Polo · Arquitecto colegiado COA Cádiz <span class="todo">[nº por confirmar]</span> · <a href="#">Aviso legal</a> · <a href="#">Privacidad</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
