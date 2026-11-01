@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /tools/
+
+Sitemap: https://carlotapalomarsanchez-beep.github.io/Enrique-Sanchez-Polo/sitemap.xml

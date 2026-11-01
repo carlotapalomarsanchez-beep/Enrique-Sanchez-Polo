@@ -1,35 +1,75 @@
 """Genera las páginas HTML del sitio con cabecera y pie compartidos."""
-import sys, pathlib
+import sys, pathlib, re
 
 OUT = pathlib.Path(sys.argv[1])
 
 LOGO = '<svg viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg>'
 
-def head(title, desc):
+# Dirección pública de la web (GitHub Pages). Cambiar si se usa un dominio propio.
+SITE = "https://carlotapalomarsanchez-beep.github.io/Enrique-Sanchez-Polo/"
+OG_IMAGE = SITE + "og-image.png"
+PAGES = []  # para el sitemap
+
+
+def head(name, title, desc, base=None, noindex=False):
+    file = "" if name == "inicio" else f"{name}.html"
+    url = SITE + file
+    base_tag = f'\n  <base href="{base}">' if base else ""
+    robots = '\n  <meta name="robots" content="noindex">' if noindex else ""
     return f'''<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">{base_tag}
   <title>{title}</title>
-  <meta name="description" content="{desc}">
+  <meta name="description" content="{desc}">{robots}
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="{url}">
+
+  <!-- Vista previa al compartir el enlace (WhatsApp, LinkedIn, Facebook, X...) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Enrique Sánchez Polo · Arquitecto">
+  <meta property="og:title" content="{title}">
+  <meta property="og:description" content="{desc}">
+  <meta property="og:url" content="{url}">
+  <meta property="og:image" content="{OG_IMAGE}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Enrique Sánchez Polo, estudio de arquitectura en Algeciras">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{title}">
+  <meta name="twitter:description" content="{desc}">
+  <meta name="twitter:image" content="{OG_IMAGE}">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
   <script>
-    document.documentElement.classList.add('js');
-    (function (r) {{
+    (function (r, l) {{
+      // Forzar HTTPS (GitHub Pages también lo fuerza desde sus ajustes)
+      if (l.protocol === 'http:' && !/^(localhost|127\\.|192\\.168\\.)/.test(l.hostname)) l.replace('https:' + l.href.slice(5));
+      r.classList.add('js');
       var seen = false;
       try {{ seen = !!sessionStorage.getItem('esp-intro'); }} catch (e) {{}}
       r.classList.add(seen ? 'entering' : 'first-visit');
       setTimeout(function () {{ r.classList.remove('entering'); }}, 2500);
-    }})(document.documentElement);
+    }})(document.documentElement, location);
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23fff'/%3E%3Cpath d='M14 50V22l18-10 18 10v28' fill='none' stroke='%23B08D57' stroke-width='3'/%3E%3Cpath d='M26 50V34h12v16' fill='none' stroke='%23111' stroke-width='3'/%3E%3C/svg%3E">
+  <script src="script.js" defer></script>
 </head>'''
 
 INTRO = f'''
+  <a href="#contenido" class="skip">Saltar al contenido</a>
+
   <!-- Animación de entrada (solo la primera visita) -->
   <div class="intro" aria-hidden="true">
     <div class="intro__panel intro__panel--a"></div>
@@ -66,12 +106,12 @@ def nav(page):
     return f'''
   <header class="nav" id="top">
     <div class="nav__inner">
-      <a href="index.html" class="brand" aria-label="Inicio">
+      <a href="index.html" class="brand" aria-label="Enrique Sánchez Polo, arquitecto. Ir al inicio">
         <span class="brand__mark" aria-hidden="true">{LOGO}</span>
         <span class="brand__text"><strong>Enrique Sánchez Polo</strong><small>Arquitecto</small></span>
       </a>
-      <button class="nav__toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
-      <nav class="nav__links" aria-label="Principal">
+      <button class="nav__toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
+      <nav class="nav__links" id="menu" aria-label="Principal">
         <a href="index.html"{cls('inicio')}>Inicio</a>
         <a href="estudio.html"{cls('estudio')}>Estudio</a>
         <div class="nav__item has-sub">
@@ -85,20 +125,25 @@ def nav(page):
           </div>
         </div>
         <a href="proyectos.html"{cls('proyectos')}>Proyectos</a>
-        <a href="contacto.html"{cls('contacto')} data-btn>Contacto</a>
+        <a href="contacto.html"{cls('contacto')} data-btn>Pedir presupuesto</a>
       </nav>
     </div>
   </header>
 '''
 
-FOOTER = f'''
+CTA_BAND = '''
   <section class="cta-band">
     <div class="container cta-band__inner">
-      <h2 data-split>¿Tienes un proyecto en mente?</h2>
-      <a href="contacto.html" class="btn btn--gold">Hablemos <span aria-hidden="true">→</span></a>
+      <div>
+        <h2 data-split>¿Tienes un proyecto en mente?</h2>
+        <p class="cta-band__sub">Primera consulta y presupuesto sin compromiso. Respuesta en 24–48 h laborables.</p>
+      </div>
+      <a href="contacto.html" class="btn btn--gold">Pedir presupuesto <span aria-hidden="true">→</span></a>
     </div>
   </section>
+'''
 
+FOOT = f'''
   <footer class="footer">
     <div class="container footer__inner">
       <div class="brand brand--footer">
@@ -108,19 +153,36 @@ FOOTER = f'''
       <nav class="footer__links" aria-label="Pie">
         <a href="index.html">Inicio</a><a href="estudio.html">Estudio</a><a href="servicios.html">Servicios</a><a href="proyectos.html">Proyectos</a><a href="contacto.html">Contacto</a>
       </nav>
-      <p class="footer__legal">© <span id="year"></span> Enrique Sánchez Polo · Arquitecto colegiado COA Cádiz <span class="todo">[nº por confirmar]</span> · <a href="#">Aviso legal</a> · <a href="#">Privacidad</a></p>
+      <div class="footer__legal">
+        <p>© <span id="year">2026</span> Enrique Sánchez Polo · Arquitecto colegiado en el COA de Cádiz <span class="todo">[nº por confirmar]</span></p>
+        <p class="footer__legal-links"><a href="aviso-legal.html">Aviso legal y condiciones de uso</a><a href="privacidad.html">Privacidad</a><a href="cookies.html">Cookies</a><button type="button" class="link-btn" data-cookie-settings>Preferencias de cookies</button></p>
+      </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Botón fijo de presupuesto (móvil) -->
+  <a href="contacto.html" class="fab-cta">Pedir presupuesto <span aria-hidden="true">→</span></a>
+
+  <!-- Aviso de cookies -->
+  <div class="cookie" role="dialog" aria-live="polite" aria-label="Aviso de cookies" hidden>
+    <p><strong>Tu privacidad importa.</strong> Usamos cookies analíticas (Google Analytics) solo si las aceptas, para saber cómo se usa la web y mejorarla. <a href="cookies.html">Más información</a>.</p>
+    <div class="cookie__actions">
+      <button type="button" class="btn btn--small btn--ghost" data-cookie="reject">Rechazar</button>
+      <button type="button" class="btn btn--small" data-cookie="accept">Aceptar</button>
+    </div>
+  </div>
 </body>
 </html>
 '''
 
-def page(name, title, desc, body, cta=True):
-    footer = FOOTER if cta else '\n  <footer' + FOOTER.split('<footer', 1)[1]
-    html = head(title, desc) + f'\n<body data-page="{name}">\n' + INTRO + nav(name) + '\n  <main>\n' + body + '\n  </main>\n' + footer
+def page(name, title, desc, body, cta=True, base=None, noindex=False, in_sitemap=True, priority="0.8"):
+    html = (head(name, title, desc, base, noindex) + f'\n<body data-page="{name}">\n' + INTRO + nav(name)
+            + '\n  <main id="contenido">\n' + body + '\n  </main>\n' + (CTA_BAND if cta else '') + FOOT)
+    # Dibujos decorativos: ocultos para lectores de pantalla (accesibilidad)
+    html = re.sub(r'<svg (?![^>]*aria-)', '<svg aria-hidden="true" focusable="false" ', html)
     (OUT / f"{'index' if name == 'inicio' else name}.html").write_text(html, encoding="utf-8")
+    if in_sitemap:
+        PAGES.append(("" if name == "inicio" else f"{name}.html", priority))
 
 
 def page_hero(num, kicker, title, intro, art):
@@ -224,117 +286,38 @@ STEPS = '''
 '''
 
 # ---------- Edificio que se construye con el scroll ----------
-def build_svg():
-    els = []
-    # Fase 0: replanteo y cimentación
-    p0 = ['M40 520H560', 'M95 520v34h40v-34', 'M215 520v34h40v-34', 'M335 520v34h40v-34', 'M455 520v34h40v-34']
-    p0g = ['M100 500l-10 10M90 500l10 10', 'M480 500l-10 10M470 500l10 10']
-    # Fase 1: estructura (pilares y forjados)
-    p1 = []
-    for x in (115, 235, 355, 475):
-        p1.append(f'M{x} 520V170')
-    for y in (440, 360, 280, 200):
-        p1.append(f'M100 {y}H490')
-    p1g = ['M530 520V90', 'M530 100H300', 'M530 100l-40-40v40', 'M380 100v60', 'M370 160h20v14h-20z']  # grúa
-    # Fase 2: cerramientos y ventanas
-    p2 = ['M100 520V200H490V520']
-    wins = []
-    for y in (380, 300, 220):
-        for x in (135, 255, 375):
-            wins.append(f'M{x} {y}h80v44h-80z')
-    p2 += wins
-    p2 += ['M150 520v-58h50v58', 'M260 462h70v40h-70z', 'M380 462h70v40h-70z']
-    # Fase 3: cubierta e instalaciones
-    p3 = ['M90 200H500', 'M90 200v-14H500v14', 'M140 186v-30h60v30', 'M380 186v-22h50v22', 'M400 164v-14']
-    p3g = ['M220 186V120', 'M196 120h48', 'M206 136h28', 'M220 120l-14 16M220 120l14 16']
-    # Fase 4: entrega (cotas, vegetación, luz)
-    p4 = ['M100 580H490', 'M100 572v16M490 572v16', 'M580 520V200', 'M572 520h16M572 200h16',
-          'M60 520c0-30 10-40 20-40s20 10 20 40', 'M80 520v-20', 'M520 520c0-24 8-32 16-32s16 8 16 32']
-    p4g = ['M100 200l195-0 195 0', 'M295 120l18 10-18 10-18-10z']
+PHASES = ["Proyecto", "Cimentación", "Estructura", "Cerramientos", "Cubierta e instalaciones", "Entrega"]
 
-    def grp(paths, phase, cls):
-        return "".join(f'<path class="{cls}" data-phase="{phase}" d="{d}"/>' for d in paths)
-
-    els.append('<g class="b-grid">' + "".join(f'<path d="M{x} 40V600"/>' for x in range(40, 600, 60)) + "".join(f'<path d="M0 {y}H600"/>' for y in range(40, 620, 60)) + '</g>')
-    els.append(grp(p0, 0, 'b-ink') + grp(p0g, 0, 'b-gold'))
-    els.append(grp(p1, 1, 'b-ink') + grp(p1g, 1, 'b-gold b-crane'))
-    els.append(grp(p2, 2, 'b-ink b-win'))
-    els.append(grp(p3, 3, 'b-ink') + grp(p3g, 3, 'b-gold'))
-    els.append(grp(p4, 4, 'b-dim') + grp(p4g, 4, 'b-gold'))
-    els.append('<text class="b-label" x="295" y="604" text-anchor="middle">Certificado final de obra</text>')
-    return "".join(els)
-
-HERO = '''
-    <section class="hero">
-      <div class="hero__grid container">
-        <div class="hero__copy">
-          <p class="eyebrow reveal">Estudio de arquitectura · Algeciras</p>
-          <h1 data-split>Arquitectura rigurosa, <em class="gold">pensada para durar.</em></h1>
-          <p class="lead reveal">Más de 25 años proyectando, valorando y dirigiendo obras en Algeciras y el Campo de Gibraltar. Edificación, tasaciones, infraestructuras eléctricas, licencias y peritaciones con un único interlocutor técnico.</p>
-          <div class="hero__cta reveal">
-            <a href="contacto.html" class="btn">Solicitar presupuesto</a>
-            <a href="servicios.html" class="link-arrow">Ver servicios <span aria-hidden="true">→</span></a>
+JOURNEY = f'''
+    <section class="journey" aria-label="Presentación del estudio">
+      <div class="container journey__grid">
+        <div class="journey__art" aria-hidden="true" data-phases="{'|'.join(PHASES)}">
+          <canvas class="model"></canvas>
+          <div class="journey__meter">
+            <p class="obra__label"><span class="obra__n">00</span> <span class="obra__phase">{PHASES[0]}</span></p>
+            <p class="obra__pct"><span class="build__pct">0</span>%</p>
+            <div class="build__bar"><i></i></div>
           </div>
         </div>
 
-        <div class="hero__art" aria-hidden="true" data-parallax="0.1">
-          <svg viewBox="0 0 520 560" class="drawing">
-            <g class="grid-lines">
-              <path d="M40 0v560M140 0v560M240 0v560M340 0v560M440 0v560"/>
-              <path d="M0 80h520M0 180h520M0 280h520M0 380h520M0 480h520"/>
-            </g>
-            <g class="ink">
-              <path class="draw" d="M80 500V200h220v300"/>
-              <path class="draw" d="M300 500V120h140v380"/>
-              <path class="draw" d="M40 500h460"/>
-              <path class="draw" d="M80 260h220M80 320h220M80 380h220M80 440h220"/>
-              <path class="draw" d="M135 200v300M190 200v300M245 200v300"/>
-              <path class="draw" d="M330 160h80v60h-80zM330 260h80v60h-80zM330 360h80v60h-80z"/>
-            </g>
-            <g class="gold-line">
-              <path class="draw" d="M300 120l70-50 70 50"/>
-              <path class="draw" d="M60 530h400"/>
-              <circle cx="460" cy="70" r="26" class="draw sun"/>
-            </g>
-            <g class="dim">
-              <path d="M80 540h360M80 534v12M440 534v12"/>
-              <text x="250" y="556" text-anchor="middle">25+ años</text>
-            </g>
-          </svg>
-        </div>
-      </div>
-
-      <div class="container">
-        <ul class="stats">
-          <li class="reveal"><strong><span data-count="25">25</span><span class="gold">+</span></strong><span>años de ejercicio profesional</span></li>
-          <li class="reveal"><strong><span data-count="12">12</span></strong><span>áreas de servicio técnico</span></li>
-          <li class="reveal"><strong><span data-count="1">1</span></strong><span>interlocutor de principio a fin</span></li>
-          <li class="reveal"><strong class="stats__text">Campo de Gibraltar</strong><span>ámbito principal de trabajo</span></li>
-        </ul>
-      </div>
-      <a href="#estudio" class="scroll-cue" aria-label="Bajar"><span></span></a>
-    </section>
-'''
-
-# ---------------- INICIO ----------------
-PHASES = ["Replanteo y cimentación", "Estructura", "Cerramientos", "Cubierta e instalaciones", "Entrega"]
-
-OBRA = f'''
-    <section class="obra" id="estudio">
-      <div class="container obra__grid">
-        <aside class="obra__art" aria-hidden="true" data-phases="{'|'.join(PHASES)}">
-          <div class="obra__frame">
-            <svg viewBox="0 0 600 620" class="build__svg">{build_svg()}</svg>
-            <div class="obra__meter">
-              <p class="obra__label"><span class="obra__n">01</span> <span class="obra__phase">{PHASES[0]}</span></p>
-              <p class="obra__pct"><span class="build__pct">0</span>%</p>
-              <div class="build__bar"><i></i></div>
+        <div class="journey__content">
+          <div class="journey__hero">
+            <p class="eyebrow reveal">Estudio de arquitectura · Algeciras</p>
+            <h1 data-split>Arquitectura rigurosa, <em class="gold">pensada para durar.</em></h1>
+            <p class="lead reveal">Más de 25 años proyectando, valorando y dirigiendo obras en Algeciras y el Campo de Gibraltar. Edificación, tasaciones, infraestructuras eléctricas, licencias y peritaciones con un único interlocutor técnico.</p>
+            <div class="hero__cta reveal">
+              <a href="contacto.html" class="btn">Pedir presupuesto sin compromiso</a>
+              <a href="servicios.html" class="link-arrow">Ver servicios <span aria-hidden="true">→</span></a>
             </div>
+            <ul class="stats">
+              <li class="reveal"><strong><span data-count="25">25</span><span class="gold">+</span></strong><span>años de ejercicio profesional</span></li>
+              <li class="reveal"><strong><span data-count="12">12</span></strong><span>áreas de servicio técnico</span></li>
+              <li class="reveal"><strong><span data-count="1">1</span></strong><span>interlocutor de principio a fin</span></li>
+              <li class="reveal"><strong class="stats__text">Campo de Gibraltar</strong><span>ámbito principal de trabajo</span></li>
+            </ul>
           </div>
-        </aside>
 
-        <div class="obra__content">
-          <div class="obra__block">
+          <div class="obra__block" id="estudio">
             <p class="eyebrow reveal">01 — El estudio</p>
             <h2 data-split>Un cuarto de siglo construyendo en el sur.</h2>
             <p class="obra__text reveal">El estudio de <strong>Enrique Sánchez Polo</strong> nace en Algeciras con una idea sencilla: que cada proyecto, desde una vivienda unifamiliar hasta un centro de transformación, se resuelva con el mismo rigor técnico, claridad y cumplimiento de plazos.</p>
@@ -377,11 +360,27 @@ OBRA = f'''
     </section>
 '''
 
-inicio = HERO + marquee() + OBRA
+SCHEMA = '''
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Enrique Sánchez Polo · Arquitecto",
+      "description": "Estudio de arquitectura en Algeciras con más de 25 años de experiencia: edificación, tasaciones, infraestructuras eléctricas, licencias, legalizaciones y peritaciones.",
+      "url": "https://carlotapalomarsanchez-beep.github.io/Enrique-Sanchez-Polo/",
+      "image": "https://carlotapalomarsanchez-beep.github.io/Enrique-Sanchez-Polo/og-image.png",
+      "address": { "@type": "PostalAddress", "addressLocality": "Algeciras", "addressRegion": "Cádiz", "addressCountry": "ES" },
+      "areaServed": ["Algeciras", "La Línea de la Concepción", "San Roque", "Los Barrios", "Tarifa", "Jimena de la Frontera", "Castellar de la Frontera"],
+      "knowsAbout": ["Arquitectura", "Tasaciones", "Infraestructuras eléctricas", "Licencias de obra", "Peritaciones", "Rehabilitación"]
+    }
+    </script>
+'''
+
+inicio = JOURNEY + marquee() + SCHEMA
 
 page("inicio", "Enrique Sánchez Polo · Arquitecto en Algeciras",
      "Estudio de arquitectura de Enrique Sánchez Polo en Algeciras. Más de 25 años en edificación, tasaciones, infraestructuras eléctricas, licencias y peritaciones.",
-     inicio)
+     inicio, priority="1.0")
 
 # ---------------- ESTUDIO ----------------
 estudio = page_hero("01", "Estudio", "Más de 25 años de oficio, <em class=\"gold\">un único interlocutor.</em>",
@@ -461,11 +460,11 @@ proyectos = page_hero("03", "Proyectos", "Experiencia en escalas <em class=\"gol
       <div class="container">
         <div class="section__head section__head--row">
           <h2 data-split>Tipologías de proyecto.</h2>
-          <div class="filters reveal" role="tablist" aria-label="Filtrar tipologías">
-            <button class="filter is-active" data-filter="all">Todos</button>
-            <button class="filter" data-filter="residencial">Residencial</button>
-            <button class="filter" data-filter="tecnico">Técnico</button>
-            <button class="filter" data-filter="consultoria">Consultoría</button>
+          <div class="filters reveal" role="group" aria-label="Filtrar tipologías">
+            <button class="filter is-active" data-filter="all" aria-pressed="true">Todos</button>
+            <button class="filter" data-filter="residencial" aria-pressed="false">Residencial</button>
+            <button class="filter" data-filter="tecnico" aria-pressed="false">Técnico</button>
+            <button class="filter" data-filter="consultoria" aria-pressed="false">Consultoría</button>
           </div>
         </div>
         <div class="projects">
@@ -489,19 +488,33 @@ contacto = page_hero("04", "Contacto", "Hablemos de <em class=\"gold\">tu proyec
           <dl class="contact__list reveal">
             <div><dt>Estudio</dt><dd>Algeciras, Cádiz<br><span class="todo">[Dirección por confirmar]</span></dd></div>
             <div><dt>Teléfono</dt><dd><a href="tel:+34000000000" class="todo">[Teléfono por confirmar]</a></dd></div>
-            <div><dt>Email</dt><dd><a href="mailto:info@enriquesanchezpolo.es" class="todo">[Email por confirmar]</a></dd></div>
+            <div><dt>Email</dt><dd><a class="js-email todo" data-u="info" data-d="enriquesanchezpolo.es" href="contacto.html#contact-form">[Email por confirmar]</a></dd></div>
             <div><dt>Horario</dt><dd>Lunes a viernes · 9:00 – 14:00 / 17:00 – 20:00</dd></div>
           </dl>
         </div>
 
-        <form class="form reveal" id="contact-form" novalidate>
+        <form class="form reveal" id="contact-form" novalidate aria-describedby="form-help">
+          <p class="form__help" id="form-help">Los campos con <span aria-hidden="true">*</span><span class="sr-only">asterisco</span> son obligatorios.</p>
           <div class="form__row">
-            <label>Nombre<input type="text" name="nombre" required autocomplete="name"></label>
-            <label>Teléfono<input type="tel" name="telefono" autocomplete="tel"></label>
+            <div class="field">
+              <label for="f-nombre">Nombre *</label>
+              <input id="f-nombre" type="text" name="nombre" required minlength="2" maxlength="80" autocomplete="name" aria-describedby="e-nombre">
+              <p class="field__error" id="e-nombre"></p>
+            </div>
+            <div class="field">
+              <label for="f-telefono">Teléfono</label>
+              <input id="f-telefono" type="tel" name="telefono" maxlength="20" pattern="[+0-9 ()-]{9,20}" autocomplete="tel" inputmode="tel" aria-describedby="e-telefono">
+              <p class="field__error" id="e-telefono"></p>
+            </div>
           </div>
-          <label>Email<input type="email" name="email" required autocomplete="email"></label>
-          <label>Tipo de servicio
-            <select name="servicio">
+          <div class="field">
+            <label for="f-email">Email *</label>
+            <input id="f-email" type="email" name="email" required maxlength="120" autocomplete="email" aria-describedby="e-email">
+            <p class="field__error" id="e-email"></p>
+          </div>
+          <div class="field">
+            <label for="f-servicio">Tipo de servicio</label>
+            <select id="f-servicio" name="servicio">
               <option>Proyecto de edificación</option>
               <option>Tasación / valoración</option>
               <option>Infraestructura eléctrica</option>
@@ -510,10 +523,23 @@ contacto = page_hero("04", "Contacto", "Hablemos de <em class=\"gold\">tu proyec
               <option>Peritación o informe</option>
               <option>Otro</option>
             </select>
-          </label>
-          <label>Mensaje<textarea name="mensaje" rows="5" required></textarea></label>
-          <label class="check"><input type="checkbox" required> He leído y acepto la política de privacidad.</label>
+          </div>
+          <div class="field">
+            <label for="f-mensaje">Mensaje *</label>
+            <textarea id="f-mensaje" name="mensaje" rows="5" required minlength="10" maxlength="2000" aria-describedby="e-mensaje"></textarea>
+            <p class="field__error" id="e-mensaje"></p>
+          </div>
+          <!-- Antispam: campo trampa invisible para personas -->
+          <div class="hp" aria-hidden="true">
+            <label for="f-web">No rellenar</label>
+            <input id="f-web" type="text" name="web" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="field">
+            <label class="check" for="f-privacidad"><input id="f-privacidad" type="checkbox" name="privacidad" required aria-describedby="e-privacidad"> <span>He leído y acepto la <a href="privacidad.html">política de privacidad</a>. *</span></label>
+            <p class="field__error" id="e-privacidad"></p>
+          </div>
           <button type="submit" class="btn">Enviar consulta</button>
+          <p class="form__legal"><strong>Información básica sobre protección de datos.</strong> Responsable: Enrique Sánchez Polo. Finalidad: responder a tu consulta y, en su caso, preparar un presupuesto. Legitimación: tu consentimiento. Destinatarios: no se ceden datos a terceros salvo obligación legal. Derechos: acceso, rectificación, supresión y otros, como se explica en la <a href="privacidad.html">política de privacidad</a>.</p>
           <p class="form__status" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -542,5 +568,155 @@ contacto = page_hero("04", "Contacto", "Hablemos de <em class=\"gold\">tu proyec
 
 page("contacto", "Contacto · Enrique Sánchez Polo Arquitecto",
      "Contacta con el estudio de arquitectura de Enrique Sánchez Polo en Algeciras. Presupuesto sin compromiso.", contacto, cta=False)
+
+# ---------------- PÁGINAS LEGALES ----------------
+TODO = lambda t: f'<span class="todo">[{t}]</span>'
+TITULAR = f"""<ul>
+          <li><strong>Titular:</strong> Enrique Sánchez Polo</li>
+          <li><strong>NIF:</strong> {TODO('NIF por confirmar')}</li>
+          <li><strong>Domicilio profesional:</strong> {TODO('Dirección por confirmar')}, Algeciras (Cádiz)</li>
+          <li><strong>Email:</strong> <a class="js-email" data-u="info" data-d="enriquesanchezpolo.es" href="contacto.html">{TODO('Email por confirmar')}</a></li>
+          <li><strong>Teléfono:</strong> {TODO('Teléfono por confirmar')}</li>
+          <li><strong>Colegio profesional:</strong> Colegio Oficial de Arquitectos de Cádiz (COA Cádiz), n.º de colegiado {TODO('por confirmar')}</li>
+          <li><strong>Titulación:</strong> Arquitecto, título oficial expedido en España</li>
+        </ul>"""
+
+def legal_page(name, kicker, title, updated, body, desc):
+    html = f'''
+    <section class="page-hero page-hero--small">
+      <div class="container">
+        <p class="crumbs reveal"><a href="index.html">Inicio</a> <span>/</span> {kicker}</p>
+        <h1 data-split>{title}</h1>
+        <p class="muted reveal">Última actualización: {updated}</p>
+      </div>
+    </section>
+    <section class="section section--legal">
+      <div class="container legal">
+{body}
+      </div>
+    </section>
+'''
+    page(name, f"{kicker} · Enrique Sánchez Polo Arquitecto", desc, html, cta=False, priority="0.3")
+
+UPDATED = "noviembre de 2026"
+
+legal_page("aviso-legal", "Aviso legal", "Aviso legal y condiciones de uso", UPDATED, f"""
+        <h2>1. Datos identificativos</h2>
+        <p>En cumplimiento del artículo 10 de la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa de los datos del titular de este sitio web:</p>
+        {TITULAR}
+        <p>El ejercicio de la profesión de arquitecto está sujeto a los Estatutos Generales de los Colegios Oficiales de Arquitectos, al Código Deontológico del Consejo Superior de los Colegios de Arquitectos de España (CSCAE) y a la normativa reguladora de la edificación (Ley 38/1999 de Ordenación de la Edificación y Código Técnico de la Edificación), disponibles en <a href="https://www.cscae.com" rel="noopener" target="_blank">cscae.com</a>.</p>
+
+        <h2>2. Objeto y aceptación</h2>
+        <p>Estas condiciones regulan el acceso y uso de este sitio web, cuya finalidad es informar sobre los servicios profesionales de arquitectura del estudio. Navegar por la web implica aceptar estas condiciones. Si no estás de acuerdo, te pedimos que no la utilices.</p>
+
+        <h2>3. Condiciones de uso</h2>
+        <p>Te comprometes a usar la web de forma lícita, sin dañar su funcionamiento ni los derechos de terceros, y a no enviar a través del formulario información falsa, ofensiva o que no te pertenezca.</p>
+
+        <h2>4. Información sobre servicios y presupuestos</h2>
+        <p>La información publicada tiene carácter orientativo. Ningún contenido de la web constituye una oferta vinculante: cada encargo profesional se formaliza mediante presupuesto u hoja de encargo específica, con su alcance, honorarios y plazos, y, cuando proceda, visado colegial.</p>
+
+        <h2>5. Propiedad intelectual e industrial</h2>
+        <p>Los textos, dibujos, diseño gráfico, logotipo y código de esta web pertenecen a su titular o se usan con autorización. Queda prohibida su reproducción, distribución o transformación sin permiso expreso, salvo para uso personal y privado.</p>
+
+        <h2>6. Responsabilidad</h2>
+        <p>El titular procura que la información sea correcta y esté actualizada, pero no garantiza la ausencia de errores ni se responsabiliza de decisiones tomadas únicamente a partir de ella. Tampoco responde del contenido de sitios externos enlazados ni de interrupciones del servicio ajenas a su control.</p>
+
+        <h2>7. Protección de datos y cookies</h2>
+        <p>El tratamiento de datos personales se explica en la <a href="privacidad.html">política de privacidad</a> y el uso de cookies en la <a href="cookies.html">política de cookies</a>.</p>
+
+        <h2>8. Legislación aplicable</h2>
+        <p>Estas condiciones se rigen por la legislación española. Para cualquier controversia serán competentes los juzgados y tribunales que correspondan conforme a la normativa vigente, y en el caso de consumidores, los de su domicilio.</p>
+""", "Aviso legal y condiciones de uso del sitio web del estudio de arquitectura de Enrique Sánchez Polo en Algeciras.")
+
+legal_page("privacidad", "Privacidad", "Política de privacidad", UPDATED, f"""
+        <p>Esta política explica cómo se tratan los datos personales que nos facilitas a través de esta web, conforme al Reglamento (UE) 2016/679 (RGPD) y a la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD).</p>
+
+        <h2>1. Responsable del tratamiento</h2>
+        {TITULAR}
+
+        <h2>2. Qué datos tratamos</h2>
+        <p>Los que nos facilitas en el formulario de contacto o por email y teléfono: nombre, email, teléfono, tipo de servicio y el contenido de tu mensaje. Si aceptas las cookies analíticas, también datos de navegación anónimos o seudonimizados (ver <a href="cookies.html">política de cookies</a>).</p>
+
+        <h2>3. Para qué los usamos</h2>
+        <ul>
+          <li>Responder a tus consultas y preparar presupuestos.</li>
+          <li>Gestionar, en su caso, el encargo profesional y las obligaciones legales, fiscales y colegiales que conlleva.</li>
+          <li>Conocer de forma agregada cómo se usa la web para mejorarla (solo con tu consentimiento).</li>
+        </ul>
+        <p>No tomamos decisiones automatizadas ni elaboramos perfiles con tus datos.</p>
+
+        <h2>4. Base legal</h2>
+        <ul>
+          <li><strong>Consentimiento</strong> (art. 6.1.a RGPD) para atender tu consulta y para la analítica web.</li>
+          <li><strong>Medidas precontractuales y contrato</strong> (art. 6.1.b RGPD) si solicitas presupuesto o realizas un encargo.</li>
+          <li><strong>Obligación legal</strong> (art. 6.1.c RGPD) para conservar la documentación exigida por la normativa fiscal y profesional.</li>
+        </ul>
+
+        <h2>5. Cuánto tiempo los conservamos</h2>
+        <p>Las consultas que no den lugar a un encargo se conservan como máximo un año. Los datos de encargos se conservan mientras dure la relación profesional y, después, durante los plazos legales de responsabilidad (incluidos los de la Ley de Ordenación de la Edificación) y fiscales.</p>
+
+        <h2>6. Destinatarios</h2>
+        <p>No cedemos tus datos a terceros salvo obligación legal (por ejemplo, Administración tributaria, ayuntamientos o colegio profesional cuando el encargo lo requiera). Esta web está alojada en GitHub Pages (GitHub Inc.) y, si aceptas la analítica, usa Google Analytics (Google Ireland Ltd.). Ambos pueden implicar transferencias internacionales amparadas por el Marco de Privacidad de Datos UE-EE. UU. o cláusulas contractuales tipo.</p>
+
+        <h2>7. Tus derechos</h2>
+        <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad, así como retirar tu consentimiento en cualquier momento, escribiendo al email indicado arriba e identificándote debidamente. Si consideras que no hemos tratado bien tus datos, puedes reclamar ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" rel="noopener" target="_blank">aepd.es</a>).</p>
+
+        <h2>8. Seguridad</h2>
+        <p>Aplicamos medidas técnicas y organizativas adecuadas para proteger tus datos. La web funciona siempre bajo conexión cifrada (HTTPS).</p>
+""", "Política de privacidad del estudio de arquitectura de Enrique Sánchez Polo: qué datos tratamos, para qué y cómo ejercer tus derechos.")
+
+legal_page("cookies", "Cookies", "Política de cookies", UPDATED, f"""
+        <p>Una cookie es un pequeño archivo que un sitio web guarda en tu navegador. Esta web solo usa las cookies estrictamente necesarias y, <strong>únicamente si las aceptas</strong>, cookies analíticas.</p>
+
+        <h2>Cookies y almacenamiento que utilizamos</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Nombre</th><th>Titular</th><th>Finalidad</th><th>Duración</th><th>Tipo</th></tr></thead>
+            <tbody>
+              <tr><td>esp-cookies</td><td>Propia</td><td>Recordar si has aceptado o rechazado las cookies</td><td>12 meses</td><td>Necesaria (almacenamiento local)</td></tr>
+              <tr><td>esp-intro</td><td>Propia</td><td>No repetir la animación de entrada durante la visita</td><td>Sesión</td><td>Necesaria (almacenamiento de sesión)</td></tr>
+              <tr><td>_ga</td><td>Google</td><td>Distinguir usuarios de forma seudónima para estadísticas</td><td>2 años</td><td>Analítica (solo con consentimiento)</td></tr>
+              <tr><td>_ga_&lt;ID&gt;</td><td>Google</td><td>Mantener el estado de la sesión en Google Analytics 4</td><td>2 años</td><td>Analítica (solo con consentimiento)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Cómo gestionar tu consentimiento</h2>
+        <p>Puedes cambiar tu elección en cualquier momento: <button type="button" class="link-btn" data-cookie-settings>abrir preferencias de cookies</button>. También puedes borrar o bloquear las cookies desde la configuración de tu navegador (Chrome, Firefox, Safari o Edge). Rechazar las cookies analíticas no afecta al funcionamiento de la web.</p>
+
+        <h2>Más información</h2>
+        <p>Consulta la <a href="privacidad.html">política de privacidad</a> o la información de Google sobre <a href="https://policies.google.com/technologies/cookies?hl=es" rel="noopener" target="_blank">cómo usa las cookies</a>.</p>
+""", "Política de cookies del sitio web del estudio de arquitectura de Enrique Sánchez Polo.")
+
+# ---------------- 404 ----------------
+page("404", "Página no encontrada · Enrique Sánchez Polo Arquitecto", "La página que buscas no existe o ha cambiado de dirección.", '''
+    <section class="notfound">
+      <div class="container notfound__inner">
+        <svg class="notfound__art drawing" viewBox="0 0 400 260" aria-hidden="true">
+          <g class="ink"><path class="draw" d="M30 230h340"/><path class="draw" d="M70 230V120h90v110"/><path class="draw" d="M240 230V90h90v140"/><path class="draw" d="M95 150h40v30H95zM265 120h40v30h-40z"/></g>
+          <g class="gold-line"><path class="draw" d="M160 140c30-40 50-40 80-40" stroke-dasharray="6 8"/><path class="draw" d="M190 230v-30h20v30"/></g>
+        </svg>
+        <p class="eyebrow">Error 404</p>
+        <h1 data-split>Esta página <em class="gold">no está en el plano.</em></h1>
+        <p class="lead">Puede que el enlace sea antiguo o tenga un error. Te ayudamos a encontrar lo que buscas.</p>
+        <div class="hero__cta">
+          <a href="index.html" class="btn">Volver al inicio</a>
+          <a href="servicios.html" class="link-arrow">Ver servicios <span aria-hidden="true">→</span></a>
+          <a href="contacto.html" class="link-arrow">Contactar <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+''', cta=False, base="/Enrique-Sanchez-Polo/", noindex=True, in_sitemap=False)
+
+# ---------------- SITEMAP Y ROBOTS ----------------
+import datetime
+today = datetime.date.today().isoformat()
+urls = "\n".join(f"  <url><loc>{SITE}{u}</loc><lastmod>{today}</lastmod><priority>{pr}</priority></url>" for u, pr in PAGES)
+(OUT / "sitemap.xml").write_text(f'''<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{urls}
+</urlset>
+''', encoding="utf-8")
+(OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /tools/\n\nSitemap: {SITE}sitemap.xml\n", encoding="utf-8")
 
 print("ok")

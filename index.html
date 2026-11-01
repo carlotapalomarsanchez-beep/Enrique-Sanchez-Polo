@@ -5,29 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Enrique Sánchez Polo · Arquitecto en Algeciras</title>
   <meta name="description" content="Estudio de arquitectura de Enrique Sánchez Polo en Algeciras. Más de 25 años en edificación, tasaciones, infraestructuras eléctricas, licencias y peritaciones.">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="https://carlotapalomarsanchez-beep.github.io/Enrique-Sanchez-Polo/">
+
+  <!-- Vista previa al compartir el enlace (WhatsApp, LinkedIn, Facebook, X...) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Enrique Sánchez Polo · Arquitecto">
+  <meta property="og:title" content="Enrique Sánchez Polo · Arquitecto en Algeciras">
+  <meta property="og:description" content="Estudio de arquitectura de Enrique Sánchez Polo en Algeciras. Más de 25 años en edificación, tasaciones, infraestructuras eléctricas, licencias y peritaciones.">
+  <meta property="og:url" content="https://carlotapalomarsanchez-beep.github.io/Enrique-Sanchez-Polo/">
+  <meta property="og:image" content="https://carlotapalomarsanchez-beep.github.io/Enrique-Sanchez-Polo/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Enrique Sánchez Polo, estudio de arquitectura en Algeciras">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Enrique Sánchez Polo · Arquitecto en Algeciras">
+  <meta name="twitter:description" content="Estudio de arquitectura de Enrique Sánchez Polo en Algeciras. Más de 25 años en edificación, tasaciones, infraestructuras eléctricas, licencias y peritaciones.">
+  <meta name="twitter:image" content="https://carlotapalomarsanchez-beep.github.io/Enrique-Sanchez-Polo/og-image.png">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
   <script>
-    document.documentElement.classList.add('js');
-    (function (r) {
+    (function (r, l) {
+      // Forzar HTTPS (GitHub Pages también lo fuerza desde sus ajustes)
+      if (l.protocol === 'http:' && !/^(localhost|127\.|192\.168\.)/.test(l.hostname)) l.replace('https:' + l.href.slice(5));
+      r.classList.add('js');
       var seen = false;
       try { seen = !!sessionStorage.getItem('esp-intro'); } catch (e) {}
       r.classList.add(seen ? 'entering' : 'first-visit');
       setTimeout(function () { r.classList.remove('entering'); }, 2500);
-    })(document.documentElement);
+    })(document.documentElement, location);
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23fff'/%3E%3Cpath d='M14 50V22l18-10 18 10v28' fill='none' stroke='%23B08D57' stroke-width='3'/%3E%3Cpath d='M26 50V34h12v16' fill='none' stroke='%23111' stroke-width='3'/%3E%3C/svg%3E">
+  <script src="script.js" defer></script>
 </head>
 <body data-page="inicio">
+
+  <a href="#contenido" class="skip">Saltar al contenido</a>
 
   <!-- Animación de entrada (solo la primera visita) -->
   <div class="intro" aria-hidden="true">
     <div class="intro__panel intro__panel--a"></div>
     <div class="intro__panel intro__panel--b"></div>
     <div class="intro__content">
-      <svg class="intro__logo" viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg>
+      <svg aria-hidden="true" focusable="false" class="intro__logo" viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg>
       <p class="intro__name"><span>Enrique</span> <span>Sánchez</span> <span>Polo</span></p>
       <p class="intro__role">Arquitecto · Algeciras</p>
       <div class="intro__bar"><span></span></div>
@@ -41,12 +71,12 @@
 
   <header class="nav" id="top">
     <div class="nav__inner">
-      <a href="index.html" class="brand" aria-label="Inicio">
-        <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg></span>
+      <a href="index.html" class="brand" aria-label="Enrique Sánchez Polo, arquitecto. Ir al inicio">
+        <span class="brand__mark" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg></span>
         <span class="brand__text"><strong>Enrique Sánchez Polo</strong><small>Arquitecto</small></span>
       </a>
-      <button class="nav__toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
-      <nav class="nav__links" aria-label="Principal">
+      <button class="nav__toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
+      <nav class="nav__links" id="menu" aria-label="Principal">
         <a href="index.html" class="is-active" aria-current="page">Inicio</a>
         <a href="estudio.html">Estudio</a>
         <div class="nav__item has-sub">
@@ -67,82 +97,42 @@
           </div>
         </div>
         <a href="proyectos.html">Proyectos</a>
-        <a href="contacto.html" data-btn>Contacto</a>
+        <a href="contacto.html" data-btn>Pedir presupuesto</a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="contenido">
 
-    <section class="hero">
-      <div class="hero__grid container">
-        <div class="hero__copy">
-          <p class="eyebrow reveal">Estudio de arquitectura · Algeciras</p>
-          <h1 data-split>Arquitectura rigurosa, <em class="gold">pensada para durar.</em></h1>
-          <p class="lead reveal">Más de 25 años proyectando, valorando y dirigiendo obras en Algeciras y el Campo de Gibraltar. Edificación, tasaciones, infraestructuras eléctricas, licencias y peritaciones con un único interlocutor técnico.</p>
-          <div class="hero__cta reveal">
-            <a href="contacto.html" class="btn">Solicitar presupuesto</a>
-            <a href="servicios.html" class="link-arrow">Ver servicios <span aria-hidden="true">→</span></a>
+    <section class="journey" aria-label="Presentación del estudio">
+      <div class="container journey__grid">
+        <div class="journey__art" aria-hidden="true" data-phases="Proyecto|Cimentación|Estructura|Cerramientos|Cubierta e instalaciones|Entrega">
+          <canvas class="model"></canvas>
+          <div class="journey__meter">
+            <p class="obra__label"><span class="obra__n">00</span> <span class="obra__phase">Proyecto</span></p>
+            <p class="obra__pct"><span class="build__pct">0</span>%</p>
+            <div class="build__bar"><i></i></div>
           </div>
         </div>
 
-        <div class="hero__art" aria-hidden="true" data-parallax="0.1">
-          <svg viewBox="0 0 520 560" class="drawing">
-            <g class="grid-lines">
-              <path d="M40 0v560M140 0v560M240 0v560M340 0v560M440 0v560"/>
-              <path d="M0 80h520M0 180h520M0 280h520M0 380h520M0 480h520"/>
-            </g>
-            <g class="ink">
-              <path class="draw" d="M80 500V200h220v300"/>
-              <path class="draw" d="M300 500V120h140v380"/>
-              <path class="draw" d="M40 500h460"/>
-              <path class="draw" d="M80 260h220M80 320h220M80 380h220M80 440h220"/>
-              <path class="draw" d="M135 200v300M190 200v300M245 200v300"/>
-              <path class="draw" d="M330 160h80v60h-80zM330 260h80v60h-80zM330 360h80v60h-80z"/>
-            </g>
-            <g class="gold-line">
-              <path class="draw" d="M300 120l70-50 70 50"/>
-              <path class="draw" d="M60 530h400"/>
-              <circle cx="460" cy="70" r="26" class="draw sun"/>
-            </g>
-            <g class="dim">
-              <path d="M80 540h360M80 534v12M440 534v12"/>
-              <text x="250" y="556" text-anchor="middle">25+ años</text>
-            </g>
-          </svg>
-        </div>
-      </div>
-
-      <div class="container">
-        <ul class="stats">
-          <li class="reveal"><strong><span data-count="25">25</span><span class="gold">+</span></strong><span>años de ejercicio profesional</span></li>
-          <li class="reveal"><strong><span data-count="12">12</span></strong><span>áreas de servicio técnico</span></li>
-          <li class="reveal"><strong><span data-count="1">1</span></strong><span>interlocutor de principio a fin</span></li>
-          <li class="reveal"><strong class="stats__text">Campo de Gibraltar</strong><span>ámbito principal de trabajo</span></li>
-        </ul>
-      </div>
-      <a href="#estudio" class="scroll-cue" aria-label="Bajar"><span></span></a>
-    </section>
-
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee__track"><span>Edificación</span><i>✦</i><span>Tasaciones</span><i>✦</i><span>Infraestructuras eléctricas</span><i>✦</i><span>Rehabilitación</span><i>✦</i><span>Licencias</span><i>✦</i><span>Legalizaciones AFO</span><i>✦</i><span>Peritaciones</span><i>✦</i><span>Dirección de obra</span><i>✦</i><span>Naves industriales</span><i>✦</i><span>Eficiencia energética</span><i>✦</i><span>ITE / IEE</span><i>✦</i><span>Urbanismo</span><i>✦</i><span>Edificación</span><i>✦</i><span>Tasaciones</span><i>✦</i><span>Infraestructuras eléctricas</span><i>✦</i><span>Rehabilitación</span><i>✦</i><span>Licencias</span><i>✦</i><span>Legalizaciones AFO</span><i>✦</i><span>Peritaciones</span><i>✦</i><span>Dirección de obra</span><i>✦</i><span>Naves industriales</span><i>✦</i><span>Eficiencia energética</span><i>✦</i><span>ITE / IEE</span><i>✦</i><span>Urbanismo</span><i>✦</i></div>
-    </div>
-
-    <section class="obra" id="estudio">
-      <div class="container obra__grid">
-        <aside class="obra__art" aria-hidden="true" data-phases="Replanteo y cimentación|Estructura|Cerramientos|Cubierta e instalaciones|Entrega">
-          <div class="obra__frame">
-            <svg viewBox="0 0 600 620" class="build__svg"><g class="b-grid"><path d="M40 40V600"/><path d="M100 40V600"/><path d="M160 40V600"/><path d="M220 40V600"/><path d="M280 40V600"/><path d="M340 40V600"/><path d="M400 40V600"/><path d="M460 40V600"/><path d="M520 40V600"/><path d="M580 40V600"/><path d="M0 40H600"/><path d="M0 100H600"/><path d="M0 160H600"/><path d="M0 220H600"/><path d="M0 280H600"/><path d="M0 340H600"/><path d="M0 400H600"/><path d="M0 460H600"/><path d="M0 520H600"/><path d="M0 580H600"/></g><path class="b-ink" data-phase="0" d="M40 520H560"/><path class="b-ink" data-phase="0" d="M95 520v34h40v-34"/><path class="b-ink" data-phase="0" d="M215 520v34h40v-34"/><path class="b-ink" data-phase="0" d="M335 520v34h40v-34"/><path class="b-ink" data-phase="0" d="M455 520v34h40v-34"/><path class="b-gold" data-phase="0" d="M100 500l-10 10M90 500l10 10"/><path class="b-gold" data-phase="0" d="M480 500l-10 10M470 500l10 10"/><path class="b-ink" data-phase="1" d="M115 520V170"/><path class="b-ink" data-phase="1" d="M235 520V170"/><path class="b-ink" data-phase="1" d="M355 520V170"/><path class="b-ink" data-phase="1" d="M475 520V170"/><path class="b-ink" data-phase="1" d="M100 440H490"/><path class="b-ink" data-phase="1" d="M100 360H490"/><path class="b-ink" data-phase="1" d="M100 280H490"/><path class="b-ink" data-phase="1" d="M100 200H490"/><path class="b-gold b-crane" data-phase="1" d="M530 520V90"/><path class="b-gold b-crane" data-phase="1" d="M530 100H300"/><path class="b-gold b-crane" data-phase="1" d="M530 100l-40-40v40"/><path class="b-gold b-crane" data-phase="1" d="M380 100v60"/><path class="b-gold b-crane" data-phase="1" d="M370 160h20v14h-20z"/><path class="b-ink b-win" data-phase="2" d="M100 520V200H490V520"/><path class="b-ink b-win" data-phase="2" d="M135 380h80v44h-80z"/><path class="b-ink b-win" data-phase="2" d="M255 380h80v44h-80z"/><path class="b-ink b-win" data-phase="2" d="M375 380h80v44h-80z"/><path class="b-ink b-win" data-phase="2" d="M135 300h80v44h-80z"/><path class="b-ink b-win" data-phase="2" d="M255 300h80v44h-80z"/><path class="b-ink b-win" data-phase="2" d="M375 300h80v44h-80z"/><path class="b-ink b-win" data-phase="2" d="M135 220h80v44h-80z"/><path class="b-ink b-win" data-phase="2" d="M255 220h80v44h-80z"/><path class="b-ink b-win" data-phase="2" d="M375 220h80v44h-80z"/><path class="b-ink b-win" data-phase="2" d="M150 520v-58h50v58"/><path class="b-ink b-win" data-phase="2" d="M260 462h70v40h-70z"/><path class="b-ink b-win" data-phase="2" d="M380 462h70v40h-70z"/><path class="b-ink" data-phase="3" d="M90 200H500"/><path class="b-ink" data-phase="3" d="M90 200v-14H500v14"/><path class="b-ink" data-phase="3" d="M140 186v-30h60v30"/><path class="b-ink" data-phase="3" d="M380 186v-22h50v22"/><path class="b-ink" data-phase="3" d="M400 164v-14"/><path class="b-gold" data-phase="3" d="M220 186V120"/><path class="b-gold" data-phase="3" d="M196 120h48"/><path class="b-gold" data-phase="3" d="M206 136h28"/><path class="b-gold" data-phase="3" d="M220 120l-14 16M220 120l14 16"/><path class="b-dim" data-phase="4" d="M100 580H490"/><path class="b-dim" data-phase="4" d="M100 572v16M490 572v16"/><path class="b-dim" data-phase="4" d="M580 520V200"/><path class="b-dim" data-phase="4" d="M572 520h16M572 200h16"/><path class="b-dim" data-phase="4" d="M60 520c0-30 10-40 20-40s20 10 20 40"/><path class="b-dim" data-phase="4" d="M80 520v-20"/><path class="b-dim" data-phase="4" d="M520 520c0-24 8-32 16-32s16 8 16 32"/><path class="b-gold" data-phase="4" d="M100 200l195-0 195 0"/><path class="b-gold" data-phase="4" d="M295 120l18 10-18 10-18-10z"/><text class="b-label" x="295" y="604" text-anchor="middle">Certificado final de obra</text></svg>
-            <div class="obra__meter">
-              <p class="obra__label"><span class="obra__n">01</span> <span class="obra__phase">Replanteo y cimentación</span></p>
-              <p class="obra__pct"><span class="build__pct">0</span>%</p>
-              <div class="build__bar"><i></i></div>
+        <div class="journey__content">
+          <div class="journey__hero">
+            <p class="eyebrow reveal">Estudio de arquitectura · Algeciras</p>
+            <h1 data-split>Arquitectura rigurosa, <em class="gold">pensada para durar.</em></h1>
+            <p class="lead reveal">Más de 25 años proyectando, valorando y dirigiendo obras en Algeciras y el Campo de Gibraltar. Edificación, tasaciones, infraestructuras eléctricas, licencias y peritaciones con un único interlocutor técnico.</p>
+            <div class="hero__cta reveal">
+              <a href="contacto.html" class="btn">Pedir presupuesto sin compromiso</a>
+              <a href="servicios.html" class="link-arrow">Ver servicios <span aria-hidden="true">→</span></a>
             </div>
+            <ul class="stats">
+              <li class="reveal"><strong><span data-count="25">25</span><span class="gold">+</span></strong><span>años de ejercicio profesional</span></li>
+              <li class="reveal"><strong><span data-count="12">12</span></strong><span>áreas de servicio técnico</span></li>
+              <li class="reveal"><strong><span data-count="1">1</span></strong><span>interlocutor de principio a fin</span></li>
+              <li class="reveal"><strong class="stats__text">Campo de Gibraltar</strong><span>ámbito principal de trabajo</span></li>
+            </ul>
           </div>
-        </aside>
 
-        <div class="obra__content">
-          <div class="obra__block">
+          <div class="obra__block" id="estudio">
             <p class="eyebrow reveal">01 — El estudio</p>
             <h2 data-split>Un cuarto de siglo construyendo en el sur.</h2>
             <p class="obra__text reveal">El estudio de <strong>Enrique Sánchez Polo</strong> nace en Algeciras con una idea sencilla: que cada proyecto, desde una vivienda unifamiliar hasta un centro de transformación, se resuelva con el mismo rigor técnico, claridad y cumplimiento de plazos.</p>
@@ -213,28 +203,62 @@
       </div>
     </section>
 
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track"><span>Edificación</span><i>✦</i><span>Tasaciones</span><i>✦</i><span>Infraestructuras eléctricas</span><i>✦</i><span>Rehabilitación</span><i>✦</i><span>Licencias</span><i>✦</i><span>Legalizaciones AFO</span><i>✦</i><span>Peritaciones</span><i>✦</i><span>Dirección de obra</span><i>✦</i><span>Naves industriales</span><i>✦</i><span>Eficiencia energética</span><i>✦</i><span>ITE / IEE</span><i>✦</i><span>Urbanismo</span><i>✦</i><span>Edificación</span><i>✦</i><span>Tasaciones</span><i>✦</i><span>Infraestructuras eléctricas</span><i>✦</i><span>Rehabilitación</span><i>✦</i><span>Licencias</span><i>✦</i><span>Legalizaciones AFO</span><i>✦</i><span>Peritaciones</span><i>✦</i><span>Dirección de obra</span><i>✦</i><span>Naves industriales</span><i>✦</i><span>Eficiencia energética</span><i>✦</i><span>ITE / IEE</span><i>✦</i><span>Urbanismo</span><i>✦</i></div>
+    </div>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Enrique Sánchez Polo · Arquitecto",
+      "description": "Estudio de arquitectura en Algeciras con más de 25 años de experiencia: edificación, tasaciones, infraestructuras eléctricas, licencias, legalizaciones y peritaciones.",
+      "url": "https://carlotapalomarsanchez-beep.github.io/Enrique-Sanchez-Polo/",
+      "image": "https://carlotapalomarsanchez-beep.github.io/Enrique-Sanchez-Polo/og-image.png",
+      "address": { "@type": "PostalAddress", "addressLocality": "Algeciras", "addressRegion": "Cádiz", "addressCountry": "ES" },
+      "areaServed": ["Algeciras", "La Línea de la Concepción", "San Roque", "Los Barrios", "Tarifa", "Jimena de la Frontera", "Castellar de la Frontera"],
+      "knowsAbout": ["Arquitectura", "Tasaciones", "Infraestructuras eléctricas", "Licencias de obra", "Peritaciones", "Rehabilitación"]
+    }
+    </script>
+
   </main>
 
   <section class="cta-band">
     <div class="container cta-band__inner">
-      <h2 data-split>¿Tienes un proyecto en mente?</h2>
-      <a href="contacto.html" class="btn btn--gold">Hablemos <span aria-hidden="true">→</span></a>
+      <div>
+        <h2 data-split>¿Tienes un proyecto en mente?</h2>
+        <p class="cta-band__sub">Primera consulta y presupuesto sin compromiso. Respuesta en 24–48 h laborables.</p>
+      </div>
+      <a href="contacto.html" class="btn btn--gold">Pedir presupuesto <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
   <footer class="footer">
     <div class="container footer__inner">
       <div class="brand brand--footer">
-        <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg></span>
+        <span class="brand__mark" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 40 40"><path d="M6 34V14L20 6l14 8v20" /><path class="g" d="M15 34V23h10v11" /></svg></span>
         <span class="brand__text"><strong>Enrique Sánchez Polo</strong><small>Arquitecto · Algeciras</small></span>
       </div>
       <nav class="footer__links" aria-label="Pie">
         <a href="index.html">Inicio</a><a href="estudio.html">Estudio</a><a href="servicios.html">Servicios</a><a href="proyectos.html">Proyectos</a><a href="contacto.html">Contacto</a>
       </nav>
-      <p class="footer__legal">© <span id="year"></span> Enrique Sánchez Polo · Arquitecto colegiado COA Cádiz <span class="todo">[nº por confirmar]</span> · <a href="#">Aviso legal</a> · <a href="#">Privacidad</a></p>
+      <div class="footer__legal">
+        <p>© <span id="year">2026</span> Enrique Sánchez Polo · Arquitecto colegiado en el COA de Cádiz <span class="todo">[nº por confirmar]</span></p>
+        <p class="footer__legal-links"><a href="aviso-legal.html">Aviso legal y condiciones de uso</a><a href="privacidad.html">Privacidad</a><a href="cookies.html">Cookies</a><button type="button" class="link-btn" data-cookie-settings>Preferencias de cookies</button></p>
+      </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Botón fijo de presupuesto (móvil) -->
+  <a href="contacto.html" class="fab-cta">Pedir presupuesto <span aria-hidden="true">→</span></a>
+
+  <!-- Aviso de cookies -->
+  <div class="cookie" role="dialog" aria-live="polite" aria-label="Aviso de cookies" hidden>
+    <p><strong>Tu privacidad importa.</strong> Usamos cookies analíticas (Google Analytics) solo si las aceptas, para saber cómo se usa la web y mejorarla. <a href="cookies.html">Más información</a>.</p>
+    <div class="cookie__actions">
+      <button type="button" class="btn btn--small btn--ghost" data-cookie="reject">Rechazar</button>
+      <button type="button" class="btn btn--small" data-cookie="accept">Aceptar</button>
+    </div>
+  </div>
 </body>
 </html>
