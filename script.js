@@ -231,12 +231,14 @@
     }
 
     // --- Proyección ---
-    let W = 0, H = 0, dpr = 1, scale = 1;
+    let W = 0, H = 0, dpr = 1, scale = 1, cx = 0, baseCx = 0.5;
     const resize = () => {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       W = canvas.clientWidth; H = canvas.clientHeight;
       canvas.width = W * dpr; canvas.height = H * dpr;
-      scale = Math.min(W, H * 1.1) / 15;
+      scale = Math.min(W * 0.9, H * 1.05) / 14;
+      // en pantallas anchas el edificio se coloca a la derecha para dejar sitio al texto
+      baseCx = W > 900 ? 0.7 : 0.5;
     };
     const PHI = 0.42, D = 24;
     let cosT = 1, sinT = 0;
@@ -248,7 +250,7 @@
       const y2 = yc * cosP - zr * sinP;
       const z2 = yc * sinP + zr * cosP;
       const f = D / (D - z2);
-      return [W / 2 + xr * f * scale, H * 0.5 - y2 * f * scale, z2];
+      return [cx + xr * f * scale, H * 0.52 - y2 * f * scale, z2];
     };
 
     const COLORS = { ink: '17,17,17', gold: '176,141,87', crane: '176,141,87', dim: '120,120,120' };
@@ -260,6 +262,8 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
       cosT = Math.cos(cur.th); sinT = Math.sin(cur.th);
+      // a la derecha en la portada; se centra detrás del contenido al bajar
+      cx = W * (baseCx - (baseCx - 0.5) * clamp(cur.c / 0.25));
       const c = cur.c;
       ctx.lineCap = 'round';
 
@@ -309,6 +313,20 @@
         ctx.lineWidth = e.kind === 'ink' ? 1.4 : e.kind === 'dim' ? 1 : 1.7;
         ctx.beginPath(); ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]); ctx.stroke();
       });
+
+      // fase y porcentaje escritos en el propio dibujo, bajo el edificio
+      let phI = 0;
+      T.forEach((t, i) => { if (c >= t - 1e-6 && c > 0.005) phI = i; });
+      const base = project([0, 0, 0]);
+      const ly = Math.min(base[1] + scale * 4.6, H - 70);
+      const txt = phI === T.length - 1 && c > 0.98 ? 'Entrega · Certificado final de obra' : names[phI];
+      ctx.textAlign = 'center';
+      ctx.fillStyle = 'rgba(138,106,53,0.9)';
+      ctx.font = `600 ${W > 600 ? 12 : 11}px Manrope, sans-serif`;
+      ctx.fillText(`${String(phI).padStart(2, '0')} · ${txt.toUpperCase()}`, base[0], ly);
+      ctx.fillStyle = 'rgba(17,17,17,0.55)';
+      ctx.font = `300 ${W > 600 ? 30 : 24}px Manrope, sans-serif`;
+      ctx.fillText(`${Math.round(c * 100)}%`, base[0], ly + 38);
 
       // indicador de fase
       let ph = 0;
