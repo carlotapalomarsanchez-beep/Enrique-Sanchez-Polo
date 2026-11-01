@@ -562,16 +562,6 @@ contacto = page_hero("04", "Contacto", "Hablemos de <em class=\"gold\">tu proyec
           <div class="zona__detail reveal">
             <p class="zona__kicker">Detalle · Campo de Gibraltar</p>
             @@MAP_ZOOM@@
-            <ul class="town-list" aria-label="Municipios donde trabajamos">
-              <li><button type="button" class="town-chip is-main" data-town="algeciras">Algeciras</button></li>
-              <li><button type="button" class="town-chip" data-town="la-linea-de-la-concepcion">La Línea de la Concepción</button></li>
-              <li><button type="button" class="town-chip" data-town="san-roque">San Roque</button></li>
-              <li><button type="button" class="town-chip" data-town="los-barrios">Los Barrios</button></li>
-              <li><button type="button" class="town-chip" data-town="tarifa">Tarifa</button></li>
-              <li><button type="button" class="town-chip" data-town="jimena-de-la-frontera">Jimena de la Frontera</button></li>
-              <li><button type="button" class="town-chip" data-town="castellar-de-la-frontera">Castellar de la Frontera</button></li>
-              <li><button type="button" class="town-chip" data-town="sotogrande">Sotogrande</button></li>
-            </ul>
           </div>
         </div>
       </div>

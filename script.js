@@ -58,6 +58,8 @@
     entries.forEach(e => {
       if (!e.isIntersecting) return;
       e.target.classList.add('is-visible');
+      // tras la animación, el halo de los títulos deja de recortarse
+      if (e.target.hasAttribute('data-split')) setTimeout(() => e.target.classList.add('split-done'), 1600);
       $$('[data-count]', e.target).forEach(countUp);
       io.unobserve(e.target);
     });
@@ -264,6 +266,7 @@
       cosT = Math.cos(cur.th); sinT = Math.sin(cur.th);
       // a la derecha en la portada; se centra detrás del contenido al bajar
       cx = W * (baseCx - (baseCx - 0.5) * clamp(cur.c / 0.25));
+      canvas.style.opacity = (0.6 - 0.22 * clamp(cur.c / 0.15)).toFixed(3);
       const c = cur.c;
       ctx.lineCap = 'round';
 
@@ -412,15 +415,7 @@
   const towns = $$('.town');
   const setTown = slug => {
     towns.forEach(t => t.classList.toggle('is-active', t.dataset.town === slug));
-    $$('.town-chip').forEach(c => c.classList.toggle('is-active', c.dataset.town === slug));
   };
-  $$('.town-chip').forEach(c => {
-    c.addEventListener('mouseenter', () => setTown(c.dataset.town));
-    c.addEventListener('focus', () => setTown(c.dataset.town));
-    c.addEventListener('click', () => setTown(c.dataset.town));
-    c.addEventListener('mouseleave', () => setTown(null));
-    c.addEventListener('blur', () => setTown(null));
-  });
   towns.forEach(t => {
     t.addEventListener('mouseenter', () => setTown(t.dataset.town));
     t.addEventListener('mouseleave', () => setTown(null));

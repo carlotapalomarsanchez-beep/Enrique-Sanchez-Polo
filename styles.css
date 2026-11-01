@@ -664,12 +664,6 @@ html.entering .curtain span { transform: scaleY(1); transition: none; }
 .js .zona__detail:not(.is-visible) .town { opacity: 0; }
 .js .zona__detail .town { transition: opacity .5s var(--ease) var(--d); }
 
-.town-list { list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
-.town-chip { background: var(--bg); border: 1px solid var(--line); padding: 8px 14px; font: 500 13.5px var(--sans); color: var(--ink); cursor: pointer; transition: all .25s var(--ease); }
-.town-chip:hover, .town-chip.is-active { border-color: var(--gold); color: var(--gold-ink); background: #fcfaf6; }
-.town-chip.is-main { background: var(--ink); color: #fff; border-color: var(--ink); }
-.town-chip.is-main.is-active, .town-chip.is-main:hover { background: var(--gold-ink); border-color: var(--gold-ink); color: #fff; }
-
 @media (prefers-reduced-motion: reduce) { .map__pulse { animation: none; opacity: 0; } }
 @media (max-width: 1024px) { .zona__grid { grid-template-columns: 1fr; } }
 @media (max-width: 600px) {
@@ -679,3 +673,13 @@ html.entering .curtain span { transform: scaleY(1); transition: none; }
   .map--main .map__frame-label { transform: translate(-150px, -28px); }
   .town text { font-size: 17px; }
 }
+
+/* Legibilidad sobre el dibujo de fondo: halo blanco detrás de los textos */
+.journey .eyebrow, .journey h1, .journey h2, .journey h3, .journey .lead, .journey .obra__text,
+.journey .steps p, .journey .clients p, .journey .link-arrow, .journey .stats li {
+  text-shadow: 0 0 2px #fff, 0 0 6px #fff, 0 0 12px #fff, 0 0 22px #fff, 0 0 34px #fff;
+}
+.journey h2 { font-weight: 400; color: #0b0b0b; }
+.journey .obra__text { color: #333; }
+.journey .steps p, .journey .clients p { color: #3d3d3d; }
+.js .journey [data-split].split-done .w { overflow: visible; }
